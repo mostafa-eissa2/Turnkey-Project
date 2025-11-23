@@ -1,4 +1,5 @@
 import React from "react";
+// 🟢 تأكدنا هنا من إضافة Briefcase و Clock في الاستيراد
 import {
   HardHat,
   Scale,
@@ -8,6 +9,10 @@ import {
   Users,
   Zap,
   Hammer,
+  Package,
+  UserCog,
+  Briefcase,
+  Clock,
 } from "lucide-react";
 
 export const content = {
@@ -22,6 +27,17 @@ export const content = {
     footer_contact: "Contact Us",
     footer_address: "New Cairo, Egypt",
     footer_rights: "All Rights Reserved.",
+    about_label: "WHO WE ARE",
+    about_title: "Pioneering Infrastructure Solutions",
+    about_desc:
+      "Elsewedy Cables - Turnkey Projects Sector is a leading force in delivering integrated infrastructure solutions. We don't just build projects; we build sustainable legacies that serve the community and support development.",
+    about_points: [
+      "Commitment to Market Leadership", // 1. التزام بالريادة
+      "Commitment to Safety & Security (HSE)", // 2. التزام بالسلامة
+      "Commitment to Quality & Precision", // 3. التزام بالجودة
+    ],
+    experience_years: "85+",
+    experience_text: "Years of Experience",
   },
   ar: {
     hero_slogan: "بنأسس صح... عشان يدوم الأمن",
@@ -34,17 +50,27 @@ export const content = {
     footer_contact: "تواصل معنا",
     footer_address: "القاهرة الجديدة، مصر",
     footer_rights: "جميع الحقوق محفوظة.",
+    about_label: "من نحن",
+    about_title: "رواد حلول البنية التحتية",
+    about_desc:
+      "السويدي للكابلات - قطاع المشروعات هي كيان رائد في تقديم حلول البنية التحتية المتكاملة. نحن لا نبني مجرد مشروعات، بل نبني مستقبلاً مستداماً يخدم المجتمع ويدعم التنمية.",
+    about_points: [
+      "الالتزام بالريادة في السوق العالمي", // 1. الريادة
+      "الالتزام بمعايير الأمن والسلامة", // 2. السلامة
+      "الالتزام بالجودة والدقة في التنفيذ", // 3. الجودة
+    ],
+    experience_years: "+85",
+    experience_text: "عاماً من الخبرة",
   },
 };
 
-// 🟢 تم إضافة الأقسام الجديدة هنا (تنفيذ الكهرباء + تنفيذ المدني)
 export const departments = [
   {
     id: 1,
     nameEn: "HSE",
     nameAr: "السلامة والصحة المهنية",
     icon: <HardHat size={24} />,
-    link: "https://turnkey-hse-dashboard.vercel.app/", // 🟢 أضفنا اللينك هنا
+    link: "https://turnkey-hse-dashboard.vercel.app/",
   },
   {
     id: 2,
@@ -63,18 +89,30 @@ export const departments = [
     nameEn: "Civil Execution",
     nameAr: "تنفيذ المدني",
     icon: <Hammer size={24} />,
-  }, // جديد
+  },
   {
     id: 5,
     nameEn: "Electrical Execution",
     nameAr: "تنفيذ الكهرباء",
     icon: <Zap size={24} />,
-  }, // جديد
+  },
   {
     id: 6,
     nameEn: "Surveying & GIS",
     nameAr: "المساحة و GIS",
     icon: <Map size={24} />,
+  },
+  {
+    id: 9,
+    nameEn: "Stores & Warehouse",
+    nameAr: "المخازن",
+    icon: <Package size={24} />,
+  },
+  {
+    id: 10,
+    nameEn: "Human Resources (HR)",
+    nameAr: "الموارد البشرية",
+    icon: <UserCog size={24} />,
   },
   {
     id: 7,
@@ -85,7 +123,6 @@ export const departments = [
   { id: 8, nameEn: "Finance", nameAr: "الماليات", icon: <Users size={24} /> },
 ];
 
-// 🟢 تم تعديل ترتيب ونوع المشروعات
 export const projects = [
   {
     titleEn: "High Voltage Projects",
@@ -119,4 +156,27 @@ export const leaders = [
   },
 ];
 
-// ... (داخل src/data.jsx)
+// 🟢 مصفوفة الإحصائيات الجديدة
+export const stats = [
+  {
+    id: 1,
+    value: "405+",
+    labelEn: "Employees",
+    labelAr: "موظف وعامل",
+    icon: <Users size={32} />,
+  },
+  {
+    id: 2,
+    value: "30+",
+    labelEn: "Completed Projects",
+    labelAr: "مشروع مكتمل",
+    icon: <Briefcase size={32} />,
+  },
+  {
+    id: 3,
+    value: "4M+",
+    labelEn: "Safe Man-Hours",
+    labelAr: "ساعات عمل آمنة",
+    icon: <Clock size={32} />,
+  },
+];
