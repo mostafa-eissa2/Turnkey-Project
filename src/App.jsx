@@ -465,7 +465,7 @@ export default function App() {
               <div className="space-y-3 text-xs">
                 <p className="flex items-start gap-3 text-gray-300">
                   <span>📍</span>
-                  <span>New Cairo, Egypt</span>
+                  <span>10th of Ramadan City, Industrial Zone</span>
                 </p>
                 <p className="flex items-center gap-3 text-gray-300">
                   <span>📞</span>
