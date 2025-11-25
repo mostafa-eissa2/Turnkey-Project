@@ -1,5 +1,5 @@
 import React from "react";
-// 🟢 تأكدنا هنا من إضافة Briefcase و Clock في الاستيراد
+// 🟢 تم إضافة Wrench (للصيانة) هنا
 import {
   HardHat,
   Scale,
@@ -13,6 +13,7 @@ import {
   UserCog,
   Briefcase,
   Clock,
+  Wrench,
 } from "lucide-react";
 
 export const content = {
@@ -29,12 +30,13 @@ export const content = {
     footer_rights: "All Rights Reserved.",
     about_label: "WHO WE ARE",
     about_title: "Pioneering Infrastructure Solutions",
+    // 🟢 تم تعديل الاسم هنا ليطابق العربي (Projects Sector)
     about_desc:
-      "Elsewedy Cables - Turnkey Projects Sector is a leading force in delivering integrated infrastructure solutions. We don't just build projects; we build sustainable legacies that serve the community and support development.",
+      "Elsewedy Cables - Projects Sector is a leading force in delivering integrated infrastructure solutions. We don't just build projects; we build sustainable legacies that serve the community and support development.",
     about_points: [
-      "Commitment to Market Leadership", // 1. التزام بالريادة
-      "Commitment to Safety & Security (HSE)", // 2. التزام بالسلامة
-      "Commitment to Quality & Precision", // 3. التزام بالجودة
+      "Commitment to Market Leadership",
+      "Commitment to Safety & Security (HSE)",
+      "Commitment to Quality & Precision",
     ],
     experience_years: "85+",
     experience_text: "Years of Experience",
@@ -55,9 +57,9 @@ export const content = {
     about_desc:
       "السويدي للكابلات - قطاع المشروعات هي كيان رائد في تقديم حلول البنية التحتية المتكاملة. نحن لا نبني مجرد مشروعات، بل نبني مستقبلاً مستداماً يخدم المجتمع ويدعم التنمية.",
     about_points: [
-      "الالتزام بالريادة في السوق العالمي", // 1. الريادة
-      "الالتزام بمعايير الأمن والسلامة", // 2. السلامة
-      "الالتزام بالجودة والدقة في التنفيذ", // 3. الجودة
+      "الالتزام بالريادة في السوق العالمي",
+      "الالتزام بمعايير الأمن والسلامة",
+      "الالتزام بالجودة والدقة في التنفيذ",
     ],
     experience_years: "+85",
     experience_text: "عاماً من الخبرة",
@@ -95,6 +97,13 @@ export const departments = [
     nameEn: "Electrical Execution",
     nameAr: "تنفيذ الكهرباء",
     icon: <Zap size={24} />,
+  },
+  // 🟢 تم إضافة قسم الصيانة هنا
+  {
+    id: 11,
+    nameEn: "Maintenance",
+    nameAr: "الصيانة",
+    icon: <Wrench size={24} />,
   },
   {
     id: 6,
@@ -156,7 +165,6 @@ export const leaders = [
   },
 ];
 
-// 🟢 مصفوفة الإحصائيات الجديدة
 export const stats = [
   {
     id: 1,
