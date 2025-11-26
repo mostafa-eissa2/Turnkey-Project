@@ -339,7 +339,7 @@ export default function App() {
             />
           </div>
           <div className="container mx-auto px-6 relative z-10">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center text-white">
+            
               {stats.map((stat) => (
                 <div
                   key={stat.id}
