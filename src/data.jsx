@@ -158,7 +158,7 @@ export const leaders = [
     img: "/Ahmed-Elsewedy-editing.jpg",
   },
   {
-    roleEn: "Turnkey Project General Manager",
+    roleEn: "Turnkey Projects General Manager",
     roleAr: "المدير العام لقطاع المشروعات",
     name: "Eng. Diaa Nasr",
     img: "/Diaa Nasr.jpeg",
