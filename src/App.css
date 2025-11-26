@@ -3,7 +3,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+html {
+  scroll-behavior: smooth;
+}
 /* إعدادات عامة للخط والخلفية */
 body {
   font-family: 'Cairo', sans-serif;
@@ -34,4 +36,34 @@ body {
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* 🟢 تخصيص سكرول بار للهيكل التنظيمي */
+.org-scroll {
+  overflow-x: auto;
+  padding-bottom: 20px; /* مسافة عشان السكرول ميعطيش على الكلام */
+}
+
+/* شكل الشريط نفسه */
+.org-scroll::-webkit-scrollbar {
+  height: 8px; /* ارتفاع الشريط العرضي */
+}
+
+/* لون الخلفية (المسار) */
+.org-scroll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+  margin: 0 20px; /* هوامش من الجنبين */
+}
+
+/* لون المقبض (الجزء المتحرك) */
+.org-scroll::-webkit-scrollbar-thumb {
+  background: #C8102E; /* لون السويدي الأحمر */
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* لما تقف عليه بالماوس يغمق سنة */
+.org-scroll::-webkit-scrollbar-thumb:hover {
+  background: #a00c24;
 }
