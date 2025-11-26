@@ -165,6 +165,7 @@ export const leaders = [
   },
 ];
 
+
 export const stats = [
   {
     id: 1,
@@ -172,6 +173,14 @@ export const stats = [
     labelEn: "Employees",
     labelAr: "موظف وعامل",
     icon: <Users size={32} />,
+  },
+  {
+    // 🟢 (جديد) المشاريع الجارية
+    id: 4,
+    value: "18+",
+    labelEn: "Active Projects",
+    labelAr: "مشروع جاري",
+    icon: <Zap size={32} />, // استخدمنا علامة الطاقة لتدل على النشاط
   },
   {
     id: 2,
