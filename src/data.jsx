@@ -1,5 +1,4 @@
 import React from "react";
-// 🟢 تم إضافة Wrench (للصيانة) هنا
 import {
   HardHat,
   Scale,
@@ -30,9 +29,8 @@ export const content = {
     footer_rights: "All Rights Reserved.",
     about_label: "WHO WE ARE",
     about_title: "Pioneering Infrastructure Solutions",
-    // 🟢 تم تعديل الاسم هنا ليطابق العربي (Projects Sector)
     about_desc:
-      "Elsewedy Cables - Projects Sector is a leading force in delivering integrated infrastructure solutions. We don't just build projects; we build sustainable legacies that serve the community and support development.",
+      "Elsewedy Cables - Projects Sector is a leading force in delivering integrated infrastructure solutions.",
     about_points: [
       "Commitment to Market Leadership",
       "Commitment to Safety & Security (HSE)",
@@ -40,6 +38,9 @@ export const content = {
     ],
     experience_years: "85+",
     experience_text: "Years of Experience",
+    modal_manager: "Department Manager",
+    modal_system_btn: "Go to Dashboard",
+    modal_team: "Team Structure",
   },
   ar: {
     hero_slogan: "بنأسس صح... عشان يدوم الأمن",
@@ -55,7 +56,7 @@ export const content = {
     about_label: "من نحن",
     about_title: "رواد حلول البنية التحتية",
     about_desc:
-      "السويدي للكابلات - قطاع المشروعات هي كيان رائد في تقديم حلول البنية التحتية المتكاملة. نحن لا نبني مجرد مشروعات، بل نبني مستقبلاً مستداماً يخدم المجتمع ويدعم التنمية.",
+      "السويدي للكابلات - قطاع المشروعات هي كيان رائد في تقديم حلول البنية التحتية المتكاملة.",
     about_points: [
       "الالتزام بالريادة في السوق العالمي",
       "الالتزام بمعايير الأمن والسلامة",
@@ -63,6 +64,9 @@ export const content = {
     ],
     experience_years: "+85",
     experience_text: "عاماً من الخبرة",
+    modal_manager: "مدير الإدارة",
+    modal_system_btn: "الدخول إلى السيستم",
+    modal_team: "هيكل الفريق",
   },
 };
 
@@ -72,38 +76,79 @@ export const departments = [
     nameEn: "HSE",
     nameAr: "السلامة والصحة المهنية",
     icon: <HardHat size={24} />,
-    link: "https://turnkey-hse-dashboard.vercel.app/",
+    systemLink: "https://turnkey-hse-dashboard.vercel.app/",
+    org: {
+      managerName: "Eng. Bahaa Rashed",
+      // 🟢 التعديل هنا: وضعنا المسمى الوظيفي الخاص بهذا المدير
+      managerTitle: "Turnkey Projects HSE Manager",
+      managerImg: "/Eng Bahaa.jpeg",
+      units: [
+        { name: "Eng. Mostafa Eissa", title: "HSE Coordinator" },
+        { name: "Eng. Ahmed Attia", title: "HSE Lead Engineer" },
+        { name: "Eng. Eslam Alaa", title: "HSE Team leader" },
+        { name: "Eng. Mahmoud Kasper", title: "HSE Team leader" },
+        { name: "Eng. Mohamed Samy", title: "HSE Team leader" },
+      ],
+    },
   },
   {
     id: 2,
     nameEn: "Quality Control",
     nameAr: "الجودة (QC)",
     icon: <Activity size={24} />,
+    org: {
+      managerName: "Eng. QC Manager",
+      managerTitle: "Quality Control Head", // 🟢 مسمى مختلف هنا
+      units: [
+        { name: "Eng. Aly", title: "QC Senior" },
+        { name: "Eng. Omar", title: "QC Inspector" },
+      ],
+    },
   },
+  // ... يمكنك إضافة managerTitle لباقي الأقسام بنفس الطريقة
   {
     id: 3,
     nameEn: "Technical Office",
     nameAr: "المكتب الفني",
     icon: <FileText size={24} />,
+    org: {
+      managerName: "Eng. TO Manager",
+      managerTitle: "Technical Office Manager",
+      units: [],
+    },
   },
   {
     id: 4,
     nameEn: "Civil Execution",
     nameAr: "تنفيذ المدني",
     icon: <Hammer size={24} />,
+    org: {
+      managerName: "Eng. Civil Mgr",
+      managerTitle: "Civil Projects Manager",
+      units: [],
+    },
   },
   {
     id: 5,
     nameEn: "Electrical Execution",
     nameAr: "تنفيذ الكهرباء",
     icon: <Zap size={24} />,
+    org: {
+      managerName: "Eng. Elec Mgr",
+      managerTitle: "Electrical Projects Manager",
+      units: [],
+    },
   },
-  // 🟢 تم إضافة قسم الصيانة هنا
   {
     id: 11,
     nameEn: "Maintenance",
     nameAr: "الصيانة",
     icon: <Wrench size={24} />,
+    org: {
+      managerName: "Eng. Maint Mgr",
+      managerTitle: "Maintenance Head",
+      units: [],
+    },
   },
   {
     id: 6,
@@ -165,7 +210,6 @@ export const leaders = [
   },
 ];
 
-
 export const stats = [
   {
     id: 1,
@@ -175,12 +219,11 @@ export const stats = [
     icon: <Users size={32} />,
   },
   {
-    // 🟢 (جديد) المشاريع الجارية
     id: 4,
     value: "18+",
     labelEn: "Active Projects",
     labelAr: "مشروع جاري",
-    icon: <Zap size={32} />, // استخدمنا علامة الطاقة لتدل على النشاط
+    icon: <Zap size={32} />,
   },
   {
     id: 2,
