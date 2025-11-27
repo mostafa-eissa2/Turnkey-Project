@@ -1,8 +1,78 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ExternalLink, Users } from "lucide-react";
+import {
+  X,
+  ExternalLink,
+  Users,
+  Briefcase,
+  Activity,
+  ShieldCheck,
+} from "lucide-react";
+
+// مكون العقدة
+const TreeNode = ({ node }) => {
+  if (!node) return null;
+  const isVerticalLayout = node.isVertical;
+
+  return (
+    <li className={`tree-li ${isVerticalLayout ? "parent-of-vertical" : ""}`}>
+      <div
+        className={`relative inline-block z-10 bg-white border border-gray-200 rounded-xl text-center shadow-sm hover:shadow-lg hover:border-[#C8102E] transition-all 
+        ${node.image ? "p-3 min-w-[140px] md:min-w-[180px]" : "px-3 py-2 min-w-[120px] md:min-w-[160px]"}`}
+      >
+        {node.image && (
+          <div className="w-16 h-16 mx-auto rounded-full border-2 border-[#C8102E] overflow-hidden mb-2">
+            <img
+              src={node.image}
+              alt={node.name}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        )}
+
+        <h5
+          className={`${node.image ? "text-sm md:text-base" : "text-xs md:text-sm"} font-bold text-gray-900 leading-tight`}
+        >
+          {node.name}
+        </h5>
+
+        {node.title && (
+          <p className="text-[10px] md:text-[11px] text-[#C8102E] font-bold uppercase tracking-wide mt-1">
+            {node.title}
+          </p>
+        )}
+
+        {node.stats && (
+          <div className="mt-2 pt-2 border-t border-gray-100">
+            <span className="text-[9px] font-semibold text-gray-500 bg-gray-50 px-2 py-1 rounded-full border border-gray-200 block">
+              {node.stats}
+            </span>
+          </div>
+        )}
+
+        {node.supervisors && (
+          <div className="mt-2">
+            <span className="text-[10px] font-bold text-white bg-[#C8102E] px-2 py-0.5 rounded-md shadow-sm block">
+              {node.supervisors}
+            </span>
+          </div>
+        )}
+      </div>
+
+      {node.children && node.children.length > 0 && (
+        <ul className={`tree-ul ${isVerticalLayout ? "vertical-list" : ""}`}>
+          {node.children.map((child, index) => (
+            <TreeNode key={index} node={child} />
+          ))}
+        </ul>
+      )}
+    </li>
+  );
+};
 
 export default function DeptModal({ dept, isOpen, onClose, lang, t }) {
+  // لا نحتاج لـ scrollRef في الموبايل الآن لأننا سنوسطه بالـ CSS
+
   if (!isOpen || !dept) return null;
 
   return (
@@ -11,23 +81,21 @@ export default function DeptModal({ dept, isOpen, onClose, lang, t }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[100] flex items-center justify-center p-2 md:p-4 bg-black/70 backdrop-blur-sm"
+        className="fixed inset-0 z-[100] flex items-center justify-center p-0 md:p-4 bg-black/80 backdrop-blur-sm"
         onClick={onClose}
       >
         <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
+          initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.9, opacity: 0 }}
-          className="bg-white rounded-2xl w-full max-w-5xl max-h-[90vh] overflow-hidden shadow-2xl relative flex flex-col"
+          exit={{ scale: 0.95, opacity: 0 }}
+          className="bg-white rounded-none md:rounded-2xl w-full h-full md:max-w-[98vw] md:h-[90vh] overflow-hidden shadow-2xl relative flex flex-col"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
-          <div className="bg-[#C8102E] p-4 md:p-5 flex justify-between items-center text-white shadow-md relative z-20 shrink-0">
+          <div className="bg-[#C8102E] p-4 flex justify-between items-center text-white shadow-md z-20 shrink-0">
             <div className="flex items-center gap-3">
-              <div className="p-1.5 bg-white/20 rounded-lg backdrop-blur-sm">
-                {dept.icon}
-              </div>
-              <h2 className="text-lg md:text-2xl font-bold tracking-tight">
+              <div className="p-1.5 bg-white/20 rounded-lg">{dept.icon}</div>
+              <h2 className="text-lg md:text-xl font-bold">
                 {lang === "ar" ? dept.nameAr : dept.nameEn}
               </h2>
             </div>
@@ -37,7 +105,7 @@ export default function DeptModal({ dept, isOpen, onClose, lang, t }) {
                   href={dept.systemLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hidden md:flex items-center gap-2 bg-white text-[#C8102E] text-xs font-bold px-4 py-2 rounded-full transition-all shadow-md hover:bg-gray-100"
+                  className="hidden md:flex items-center gap-2 bg-white text-[#C8102E] text-xs font-bold px-4 py-2 rounded-full shadow-md hover:bg-gray-100 transition-all"
                 >
                   <span>{t.modal_system_btn}</span>
                   <ExternalLink size={14} />
@@ -45,7 +113,7 @@ export default function DeptModal({ dept, isOpen, onClose, lang, t }) {
               )}
               <button
                 onClick={onClose}
-                className="hover:bg-white/20 p-2 rounded-full transition-colors"
+                className="hover:bg-white/20 p-2 rounded-full"
               >
                 <X size={24} />
               </button>
@@ -53,105 +121,120 @@ export default function DeptModal({ dept, isOpen, onClose, lang, t }) {
           </div>
 
           {/* Body */}
-          <div className="p-4 md:p-8 overflow-y-auto bg-gray-50/50 flex-1">
-            {/* Mobile System Button */}
-            {dept.systemLink && (
-              <div className="md:hidden mb-6 flex justify-center">
-                <a
-                  href={dept.systemLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-white border border-[#C8102E] text-[#C8102E] text-sm font-bold px-6 py-2 rounded-full shadow-sm"
-                >
-                  <span>{t.modal_system_btn}</span>
-                  <ExternalLink size={16} />
-                </a>
+          <div className="p-4 md:p-8 overflow-auto bg-gray-50/50 flex-1 org-scroll relative">
+            {/* Desktop Stats */}
+            {dept.summary && (
+              <div className="hidden md:block absolute top-8 left-8 z-30 bg-white/90 backdrop-blur-sm p-5 rounded-2xl shadow-lg border border-gray-100 w-64">
+                <h4 className="text-[#C8102E] font-bold uppercase tracking-widest text-xs mb-4 border-b pb-2">
+                  Department Summary
+                </h4>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-red-50 rounded-lg text-[#C8102E]">
+                      <Users size={18} />
+                    </div>
+                    <div>
+                      <p className="text-xl font-bold text-gray-800">
+                        {dept.summary.totalStaff}
+                      </p>
+                      <p className="text-xs text-gray-500">Total Staff</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-red-50 rounded-lg text-[#C8102E]">
+                      <Briefcase size={18} />
+                    </div>
+                    <div>
+                      <p className="text-xl font-bold text-gray-800">
+                        {dept.summary.projects}
+                      </p>
+                      <p className="text-xs text-gray-500">Active Projects</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-red-50 rounded-lg text-[#C8102E]">
+                      <ShieldCheck size={18} />
+                    </div>
+                    <div>
+                      <p className="text-xl font-bold text-gray-800">
+                        {dept.summary.supervisors}
+                      </p>
+                      <p className="text-xs text-gray-500">Field Supervisors</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
 
-            {/* Org Chart Area */}
-            {dept.org ? (
-              <div className="flex flex-col items-center w-full">
-                <h3 className="text-gray-400 font-bold tracking-[0.2em] uppercase text-[10px] md:text-xs mb-6 border-b border-gray-200 pb-2 w-full text-center">
-                  {t.modal_team}
-                </h3>
+            {/* Mobile System Button */}
+            {dept.systemLink && (
+              <div className="md:hidden mb-4 mt-2 sticky left-0 right-0 z-30 flex justify-center w-full">
+                <div className="w-auto flex justify-center bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm">
+                  <a
+                    href={dept.systemLink}
+                    target="_blank"
+                    className="flex items-center gap-2 bg-white border-2 border-[#C8102E] text-[#C8102E] text-sm font-bold px-8 py-3 rounded-full shadow-lg hover:bg-[#C8102E] hover:text-white transition-all"
+                  >
+                    <span>{t.modal_system_btn}</span>
+                    <ExternalLink size={16} />
+                  </a>
+                </div>
+              </div>
+            )}
 
-                {/* 1. Manager (ثابت) */}
-                <div className="flex flex-col items-center mb-12 relative z-10">
-                  <div className="w-20 h-20 md:w-28 md:h-28 rounded-full border-[4px] border-[#C8102E] p-1 bg-white shadow-xl mb-3 flex items-center justify-center">
-                    <div className="w-full h-full rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
-                      {dept.org.managerImg ? (
-                        <img
-                          src={dept.org.managerImg}
-                          alt="Manager"
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <Users size={30} className="text-gray-300" />
-                      )}
-                    </div>
+            {dept.orgStructure ? (
+              // 🟢 التعديل هنا: إزالة min-w-max واستبدالها بـ w-full و justify-center
+              <div className="flex flex-col items-center w-full pt-0">
+                <div className="flex flex-col items-center w-full mobile-tree-scale">
+                  <h3 className="text-gray-400 font-bold tracking-widest uppercase text-[10px] md:text-xs mb-4 border-b border-gray-200 pb-2 text-center w-full">
+                    {t.modal_team}
+                  </h3>
+
+                  <div className="tree-container">
+                    <ul className="tree-ul p-0 m-0">
+                      <TreeNode node={dept.orgStructure} />
+                    </ul>
                   </div>
-                  <h4 className="text-lg md:text-2xl font-bold text-gray-900 text-center px-2">
-                    {dept.org.managerName}
-                  </h4>
-
-                  {/* 🟢 التعديل هنا: استخدام المسمى الخاص بالمدير */}
-                  <p className="text-xs md:text-sm text-[#C8102E] font-bold uppercase tracking-wide mt-1">
-                    {dept.org.managerTitle || t.modal_manager}
-                  </p>
-
-                  {/* خط الاتصال النازل من المدير */}
-                  {dept.org.units && dept.org.units.length > 0 && (
-                    <div className="w-[2px] h-12 bg-gray-300 absolute -bottom-12 flex flex-col items-center justify-end">
-                      <div className="w-3 h-3 bg-gray-300 rounded-full translate-y-[50%]"></div>
-                    </div>
-                  )}
                 </div>
 
-                {/* 2. Team Tree (أفقي مع سكرول) */}
-                {dept.org.units && dept.org.units.length > 0 && (
-                  <div className="w-full org-scroll pb-4">
-                    <div className="relative flex justify-center min-w-max mx-auto px-4 md:px-10 pt-8">
-                      {/* الخط الأفقي الطويل */}
-                      <div className="absolute top-0 left-10 right-10 md:left-20 md:right-20 h-[2px] bg-gray-300"></div>
-
-                      {/* صف الموظفين */}
-                      <div className="flex gap-6 md:gap-10">
-                        {dept.org.units.map((unit, i) => (
-                          <div
-                            key={i}
-                            className="flex flex-col items-center relative min-w-[140px] md:min-w-[180px]"
-                          >
-                            {/* الخط الرأسي الصاعد */}
-                            <div className="absolute -top-8 w-[2px] h-8 bg-gray-300">
-                              <div className="absolute -top-[2px] left-1/2 -translate-x-1/2 w-2 h-2 bg-gray-300 rounded-full"></div>
-                            </div>
-
-                            {/* الكارت */}
-                            <div className="bg-white border border-gray-100 px-4 py-4 md:px-6 md:py-5 rounded-xl text-center w-full shadow-sm hover:shadow-xl transition-all duration-300 group relative overflow-hidden hover:border-[#C8102E]">
-                              <div className="absolute top-0 left-0 w-1 h-full bg-gray-100 group-hover:bg-[#C8102E] transition-colors"></div>
-                              <h5 className="text-sm md:text-base font-bold text-gray-900 mb-1">
-                                {unit.name || unit}
-                              </h5>
-                              {unit.title && (
-                                <p className="text-[10px] md:text-xs text-gray-500 font-semibold uppercase tracking-wider group-hover:text-[#C8102E] transition-colors">
-                                  {unit.title}
-                                </p>
-                              )}
-                            </div>
-                          </div>
-                        ))}
+                {/* Mobile Stats Card */}
+                {dept.summary && (
+                  <div className="md:hidden mt-0 mx-auto w-[95%] bg-white p-4 rounded-xl shadow-md border-t-4 border-[#C8102E] sticky left-0 right-0 bottom-4 z-20">
+                    <h4 className="text-gray-500 font-bold uppercase text-xs mb-3 text-center">
+                      Department Overview
+                    </h4>
+                    <div className="grid grid-cols-3 gap-2 text-center divide-x divide-x-reverse divide-gray-100">
+                      <div>
+                        <p className="text-lg font-bold text-[#C8102E]">
+                          {dept.summary.totalStaff}
+                        </p>
+                        <p className="text-[9px] text-gray-400">Members</p>
+                      </div>
+                      <div>
+                        <p className="text-lg font-bold text-[#C8102E]">
+                          {dept.summary.projects}
+                        </p>
+                        <p className="text-[9px] text-gray-400">Projects</p>
+                      </div>
+                      <div>
+                        <p className="text-lg font-bold text-[#C8102E]">
+                          {dept.summary.supervisors}
+                        </p>
+                        <p className="text-[9px] text-gray-400">Supervisors</p>
                       </div>
                     </div>
                   </div>
                 )}
               </div>
             ) : (
-              <div className="text-center py-20 text-gray-400 flex flex-col items-center gap-4">
-                <div className="p-4 bg-gray-100 rounded-full">
-                  <Users size={32} />
+              <div className="flex flex-col items-center justify-center h-full text-center py-20 opacity-60">
+                <div className="bg-gray-100 p-6 rounded-full mb-4">
+                  {dept.icon}
                 </div>
-                <p>No structure data available yet.</p>
+                <h3 className="text-xl font-bold text-gray-800">Coming Soon</h3>
+                <p className="text-gray-500">
+                  Structure details will be updated soon.
+                </p>
               </div>
             )}
           </div>
