@@ -1,69 +1,134 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-html {
-  scroll-behavior: smooth;
-}
-/* إعدادات عامة للخط والخلفية */
-body {
-  font-family: 'Cairo', sans-serif;
-  background-color: #f8f9fa; /* رمادي فاتح جداً جداً مريح للعين */
-  color: #1a1a1a;
-  overflow-x: hidden;
+
+/* 🟢 1. إعدادات عامة */
+html { scroll-behavior: smooth; }
+body { font-family: 'Cairo', sans-serif; background-color: #fff; overflow-x: hidden; }
+
+/* 🟢 2. سكرول بار */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #C8102E; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* 🟢 3. CSS الهيكل التنظيمي */
+
+.tree-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+  width: 100%;
 }
 
-/* تحسين السكرول بار ليكون أنحف وأهدأ */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background-color: #ccc;
-  border-radius: 20px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background-color: #C8102E;
+.tree-ul {
+  padding-top: 30px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 0;
 }
 
-/* إخفاء شريط التمرير في السلايدر */
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.hide-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+.tree-li {
+  float: left; 
+  text-align: center;
+  list-style-type: none;
+  position: relative;
+  transition: all 0.5s;
+  padding: 20px 20px 0 20px; /* مسافات موحدة */
 }
 
-/* 🟢 تخصيص سكرول بار للهيكل التنظيمي */
+/* الكمبيوتر */
+@media (min-width: 768px) {
+  .tree-li {
+    padding: 30px 40px 0 40px; 
+  }
+}
+
+/* 🟢 رسم الخطوط */
+.tree-li::before, .tree-li::after {
+  content: ''; position: absolute; top: 0; height: 30px; width: 51%; border-top: 2px solid #ccc; z-index: 0;
+}
+.tree-li::before { right: 50%; }
+.tree-li::after { left: 50%; border-left: 2px solid #ccc; }
+
+.tree-li:first-child::before { border: 0 none; }
+.tree-li:last-child::after { border-top: 0 none; }
+
+.tree-li:last-child::before {
+  border-right: 2px solid #ccc; border-radius: 0 5px 0 0; right: 50%; transform: translateX(1px); 
+}
+.tree-li:first-child::after { border-radius: 5px 0 0 0; }
+
+.tree-li:only-child { padding-top: 0; }
+.tree-li:only-child::after, .tree-li:only-child::before { display: none; }
+
+.tree-ul::before {
+  content: ''; position: absolute; top: 0; left: 50%; border-left: 2px solid #ccc; width: 0; height: 30px; transform: translateX(-1px); z-index: 0;
+}
+
+/* 🟢 القائمة العمودية */
+.vertical-list { flex-direction: column; align-items: center; padding-top: 0; }
+.vertical-list::before {
+  content: ''; position: absolute; top: 0; bottom: 0; left: 50%; border-left: 2px solid #ccc; transform: translateX(-1px); width: 0; height: auto; z-index: 0;
+}
+.vertical-list > .tree-li { padding: 15px 0; width: 100%; }
+.vertical-list > .tree-li::before, .vertical-list > .tree-li::after { display: none !important; }
+.vertical-list > .tree-li:first-child { padding-top: 30px; }
+
+
+/* 🟢🟢🟢 تخصيص الموبايل (تقليل الفراغ) 🟢🟢🟢 */
+@media (max-width: 768px) {
+
+  .tree-container {
+    transform: none; 
+    width: auto;
+  }
+
+  .mobile-tree-scale {
+    display: flex;
+    justify-content: center;
+    transform: scale(0.65); 
+    transform-origin: top center;
+    width: max-content; 
+    min-width: 100%;
+    margin: 0; 
+
+    /* ⚠️ التعديل الجوهري: سحبنا الشجرة لفوق بقوة (-50%) */
+    margin-bottom: -50%; 
+  }
+
+  .tree-li {
+    padding: 20px 5px 0 5px;
+  }
+}
+
+/* 🟢 السكرول بار */
 .org-scroll {
   overflow-x: auto;
-  padding-bottom: 20px; /* مسافة عشان السكرول ميعطيش على الكلام */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  /* ⚠️ تقليل المساحة السفلية لتناسب البوكس فقط */
+  padding-bottom: 120px; 
 }
 
-/* شكل الشريط نفسه */
-.org-scroll::-webkit-scrollbar {
-  height: 8px; /* ارتفاع الشريط العرضي */
+/* حاوية الشجرة داخل السكرول */
+.org-scroll > div.min-w-max {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-/* لون الخلفية (المسار) */
-.org-scroll::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-  margin: 0 20px; /* هوامش من الجنبين */
-}
-
-/* لون المقبض (الجزء المتحرك) */
-.org-scroll::-webkit-scrollbar-thumb {
-  background: #C8102E; /* لون السويدي الأحمر */
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-/* لما تقف عليه بالماوس يغمق سنة */
-.org-scroll::-webkit-scrollbar-thumb:hover {
-  background: #a00c24;
+@media (min-width: 768px) {
+  .org-scroll {
+    display: block; 
+    padding-bottom: 40px;
+  }
 }
