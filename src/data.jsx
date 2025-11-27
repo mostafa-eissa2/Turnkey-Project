@@ -171,7 +171,7 @@ export const departments = [
                 {
                   name: "Diplomatic District ",
                   title: "Site Team",
-                  supervisors: " Supervisors",
+                  supervisors: "1 Supervisors",
                 },
                 {
                   name: "Octagon",
