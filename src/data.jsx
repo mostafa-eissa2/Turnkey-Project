@@ -40,7 +40,7 @@ export const content = {
     experience_text: "Years of Experience",
     modal_manager: "Department Manager",
     modal_system_btn: "Go to Dashboard",
-    modal_team: "Team Structure",
+    modal_team: "Organizational Chart",
   },
   ar: {
     hero_slogan: "بنأسس صح... عشان يدوم الأمن",
@@ -56,7 +56,7 @@ export const content = {
     about_label: "من نحن",
     about_title: "رواد حلول البنية التحتية",
     about_desc:
-      "السويدي للكابلات - قطاع المشروعات هي كيان رائد في تقديم حلول البنية التحتية المتكاملة.",
+      "السويدي للكابلات - قطاع المشروعات هي كيان رائد في تقديم حلول البنية التحتية المتكاملة. نحن لا نبني مجرد مشروعات، بل نبني مستقبلاً مستداماً يخدم المجتمع ويدعم التنمية.",
     about_points: [
       "الالتزام بالريادة في السوق العالمي",
       "الالتزام بمعايير الأمن والسلامة",
@@ -66,7 +66,7 @@ export const content = {
     experience_text: "عاماً من الخبرة",
     modal_manager: "مدير الإدارة",
     modal_system_btn: "الدخول إلى السيستم",
-    modal_team: "هيكل الفريق",
+    modal_team: "الهيكل التنظيمي",
   },
 };
 
@@ -77,78 +77,190 @@ export const departments = [
     nameAr: "السلامة والصحة المهنية",
     icon: <HardHat size={24} />,
     systemLink: "https://turnkey-hse-dashboard.vercel.app/",
-    org: {
-      managerName: "Eng. Bahaa Rashed",
-      // 🟢 التعديل هنا: وضعنا المسمى الوظيفي الخاص بهذا المدير
-      managerTitle: "Turnkey Projects HSE Manager",
-      managerImg: "/Eng Bahaa.jpeg",
-      units: [
-        { name: "Eng. Mostafa Eissa", title: "HSE Coordinator" },
-        { name: "Eng. Ahmed Attia", title: "HSE Lead Engineer" },
-        { name: "Eng. Eslam Alaa", title: "HSE Team leader" },
-        { name: "Eng. Mahmoud Kasper", title: "HSE Team leader" },
-        { name: "Eng. Mohamed Samy", title: "HSE Team leader" },
+    summary: {
+      totalStaff: 29, // إجمالي القوة البشرية
+      supervisors: 22, // عدد المشرفين
+      projects: 17, // عدد المشاريع
+      safeHours: "4M+", // ساعات العمل الآمنة
+    },
+    orgStructure: {
+      name: "Eng. Bahaa Rashed",
+      title: "Turnkey Projects HSE Manager",
+      image: "/Eng Bahaa.jpeg",
+      children: [
+        {
+          name: "Eng. Mostafa Eissa",
+          title: "HSE Coordinator",
+          children: [
+            // 1. م. أحمد عطية
+            {
+              name: "Eng. Ahmed Attia",
+              title: "HSE Lead Engineer",
+              stats: "2 Team Leaders | 8 Projects",
+              supervisors: "Total: 8 Supervisors", // 🟢 تمت الإضافة
+              children: [
+                {
+                  name: "Eng. Mohamed Samy",
+                  title: "HSE Team Leader",
+                  stats: "6 Projects",
+                  supervisors: "5 Supervisors", // 🟢 تمت الإضافة
+                  isVertical: true,
+                  children: [
+                    {
+                      name: "Dashour",
+                      title: "Site Team",
+                      supervisors: "2 Supervisors",
+                    },
+                    {
+                      name: "CRCC",
+                      title: "Site Team",
+                      supervisors: "1 Supervisors",
+                    },
+                    {
+                      name: "Alex port",
+                      title: "Site Team",
+                      supervisors: "1 Supervisors",
+                    },
+                    {
+                      name: "Abo Qer",
+                      title: "Site Team",
+                      supervisors: "1 Supervisors",
+                    },
+                    {
+                      name: "10th of Ramadan",
+                      title: "Site Team",
+                      supervisors: "0 Supervisors",
+                    },
+                    {
+                      name: "El Firdous",
+                      title: "Site Team",
+                      supervisors: "0 Supervisors",
+                    },
+                  ],
+                },
+                {
+                  name: "Eng. Tamer Fathy",
+                  title: "HSE Team Leader",
+                  stats: "2 Project",
+                  supervisors: "3 Supervisors", // 🟢 تمت الإضافة
+                  isVertical: true,
+                  children: [
+                    {
+                      name: "New Alamin ",
+                      title: "Site Team",
+                      supervisors: "1 Supervisors",
+                    },
+                    {
+                      name: "Sohag ",
+                      title: "Site Team",
+                      supervisors: "1 Supervisors",
+                    },
+                  ],
+                },
+              ],
+            },
+
+            // 2. م. إسلام علاء
+            {
+              name: "Eng. Eslam Alaa",
+              title: "HSE Team Leader",
+              stats: "6 Projects",
+              supervisors: "9 Supervisors",
+              isVertical: true,
+              children: [
+                {
+                  name: "Diplomatic District ",
+                  title: "Site Team",
+                  supervisors: " Supervisors",
+                },
+                {
+                  name: "Octagon",
+                  title: "Site Team",
+                  supervisors: "1 Supervisors",
+                },
+                {
+                  name: "H K Mutubas ",
+                  title: "Site Team",
+                  supervisors: "1 Supervisors",
+                },
+                {
+                  name: "Concrete Factory ",
+                  title: "Site Team",
+                  supervisors: "1 Supervisors",
+                },
+                {
+                  name: "Saint Catherine ",
+                  title: "Site Team",
+                  supervisors: "2 Supervisors",
+                },
+                {
+                  name: "Al Obour",
+                  title: "Site Team",
+                  supervisors: "2 Supervisors",
+                },
+              ],
+            },
+
+            // 3. م. محمود كسبر
+            {
+              name: "Eng. Mahmoud Kasper",
+              title: "HSE Team Leader",
+              stats: "3 Projects",
+              supervisors: "5 Supervisors",
+              isVertical: true,
+              children: [
+                {
+                  name: "HK Youssef El-Seddik ",
+                  title: "Site Team",
+                  supervisors: "3 Supervisors",
+                },
+                {
+                  name: "HK Nasr al Nobah",
+                  title: "Site Team",
+                  supervisors: "1 Supervisors",
+                },
+                {
+                  name: "HK Maghagha",
+                  title: "Site Team",
+                  supervisors: "1 Supervisors",
+                },
+              ],
+            },
+          ],
+        },
       ],
     },
   },
+  // ... (باقي الأقسام كما هي)
   {
     id: 2,
     nameEn: "Quality Control",
     nameAr: "الجودة (QC)",
     icon: <Activity size={24} />,
-    org: {
-      managerName: "Eng. QC Manager",
-      managerTitle: "Quality Control Head", // 🟢 مسمى مختلف هنا
-      units: [
-        { name: "Eng. Aly", title: "QC Senior" },
-        { name: "Eng. Omar", title: "QC Inspector" },
-      ],
-    },
   },
-  // ... يمكنك إضافة managerTitle لباقي الأقسام بنفس الطريقة
   {
     id: 3,
     nameEn: "Technical Office",
     nameAr: "المكتب الفني",
     icon: <FileText size={24} />,
-    org: {
-      managerName: "Eng. TO Manager",
-      managerTitle: "Technical Office Manager",
-      units: [],
-    },
   },
   {
     id: 4,
     nameEn: "Civil Execution",
     nameAr: "تنفيذ المدني",
     icon: <Hammer size={24} />,
-    org: {
-      managerName: "Eng. Civil Mgr",
-      managerTitle: "Civil Projects Manager",
-      units: [],
-    },
   },
   {
     id: 5,
     nameEn: "Electrical Execution",
     nameAr: "تنفيذ الكهرباء",
     icon: <Zap size={24} />,
-    org: {
-      managerName: "Eng. Elec Mgr",
-      managerTitle: "Electrical Projects Manager",
-      units: [],
-    },
   },
   {
     id: 11,
     nameEn: "Maintenance",
     nameAr: "الصيانة",
     icon: <Wrench size={24} />,
-    org: {
-      managerName: "Eng. Maint Mgr",
-      managerTitle: "Maintenance Head",
-      units: [],
-    },
   },
   {
     id: 6,
