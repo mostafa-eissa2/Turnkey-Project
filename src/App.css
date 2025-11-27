@@ -92,7 +92,7 @@ body { font-family: 'Cairo', sans-serif; background-color: #fff; overflow-x: hid
   .mobile-tree-scale {
     display: flex;
     justify-content: center;
-    transform: scale(0.65); 
+    transform: scale(0.60); 
     transform-origin: top center;
     width: max-content; 
     min-width: 100%;
