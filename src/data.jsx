@@ -73,7 +73,7 @@ export const content = {
 export const departments = [
   {
     id: 1,
-    nameEn: "HSE",
+    nameEn: "Occupational safety and health",
     nameAr: "السلامة والصحة المهنية",
     icon: <HardHat size={24} />,
     systemLink: "https://turnkey-hse-dashboard.vercel.app/",
