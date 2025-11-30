@@ -65,7 +65,7 @@ export const content = {
     experience_years: "+85",
     experience_text: "عاماً من الخبرة",
     modal_manager: "مدير الإدارة",
-    modal_system_btn: "تسجيل الدخول",
+    modal_system_btn: "الدخول إلى السيستم",
     modal_team: "الهيكل التنظيمي",
   },
 };
@@ -74,38 +74,51 @@ export const departments = [
   {
     id: 1,
     nameEn: "Occupational safety, health and environment",
-    nameAr: "السلامة والصحة المهنية",
+    nameAr: "السلامة و الصحة المهنية و البيئة",
     icon: <HardHat size={24} />,
     systemLink: "https://turnkey-hse-dashboard.vercel.app/",
     summary: {
-      totalStaff: 29, // إجمالي القوة البشرية
-      supervisors: 22, // عدد المشرفين
-      projects: 17, // عدد المشاريع
-      safeHours: "4M+", // ساعات العمل الآمنة
+      totalStaff: 29,
+      supervisors: 22,
+      projects: 17,
+      safeHours: "4M+",
     },
     orgStructure: {
       name: "Eng. Bahaa Rashed",
       title: "Turnkey Projects HSE Manager",
       image: "/Eng Bahaa.jpeg",
       children: [
+        // 1. م. مصطفى عيسى
         {
           name: "Eng. Mostafa Eissa",
           title: "HSE Coordinator",
+        },
+
+        // 2. م. أحمد عطية
+        {
+          name: "Eng. Ahmed Attia",
+          title: "HSE Lead Engineer",
+          stats: "3 Team Leader | 8 Projects",
+          supervisors: "Total: 9 Supervisors",
           children: [
-            // 1. م. أحمد عطية
             {
-              name: "Eng. Ahmed Attia",
-              title: "HSE Lead Engineer",
-              stats: "2 Team Leaders | 8 Projects",
-              supervisors: "Total: 8 Supervisors", // 🟢 تمت الإضافة
+              name: "Eng. Mohamed Samy",
+              title: "HSE Team Leader",
+              stats: "Direct Projects + Team Leader",
+              supervisors: "6 Supervisors",
+              // ⚠️ هنا شلنا isVertical عشان ينقسم تحته لعمودين متوازيين
               children: [
+                // 🟢 العمود الأول: المشاريع المباشرة تحت محمد سامي
                 {
-                  name: "Eng. Mohamed Samy",
-                  title: "HSE Team Leader",
-                  stats: "6 Projects",
-                  supervisors: "5 Supervisors", // 🟢 تمت الإضافة
-                  isVertical: true,
+                  name: "Direct Projects", // اسم المجموعة
+                  title: "Site Operations",
+                  isVertical: true, // المشاريع دي هتترص تحت بعض
                   children: [
+                    {
+                      name: "New Alamin",
+                      title: "Site Team",
+                      supervisors: "1 Supervisor",
+                    },
                     {
                       name: "Dashour",
                       title: "Site Team",
@@ -114,22 +127,17 @@ export const departments = [
                     {
                       name: "CRCC",
                       title: "Site Team",
-                      supervisors: "1 Supervisors",
+                      supervisors: "1 Supervisor",
                     },
                     {
                       name: "Alex port",
                       title: "Site Team",
-                      supervisors: "1 Supervisors",
+                      supervisors: "1 Supervisor",
                     },
                     {
                       name: "Abo Qer",
                       title: "Site Team",
-                      supervisors: "1 Supervisors",
-                    },
-                    {
-                      name: "10th of Ramadan",
-                      title: "Site Team",
-                      supervisors: "0 Supervisors",
+                      supervisors: "1 Supervisor",
                     },
                     {
                       name: "El Firdous",
@@ -138,100 +146,111 @@ export const departments = [
                     },
                   ],
                 },
+
+                // 🟢 العمود الثاني: م. تامر فتحي (بموازي للمشاريع)
                 {
                   name: "Eng. Tamer Fathy",
                   title: "HSE Team Leader",
-                  stats: "2 Project",
-                  supervisors: "3 Supervisors", // 🟢 تمت الإضافة
+                  stats: "1 Project",
+                  supervisors: "1 Supervisor",
                   isVertical: true,
                   children: [
                     {
-                      name: "New Alamin ",
+                      name: "Sohag",
                       title: "Site Team",
-                      supervisors: "1 Supervisors",
+                      supervisors: "1 Supervisor",
                     },
+                  ],
+                },
+                {
+                  name: "Team Leader",
+                  title: "HSE Team Leader",
+                  stats: "1 Project",
+                  supervisors: "1 Supervisor",
+                  isVertical: true,
+                  children: [
                     {
-                      name: "Sohag ",
+                      name: "10th of Ramadan",
                       title: "Site Team",
-                      supervisors: "1 Supervisors",
+                      supervisors: "1 Supervisor",
                     },
                   ],
                 },
               ],
             },
+          ],
+        },
 
-            // 2. م. إسلام علاء
+        // 3. م. إسلام علاء
+        {
+          name: "Eng. Eslam Alaa",
+          title: "HSE Team Leader",
+          stats: "6 Projects",
+          supervisors: "9 Supervisors",
+          isVertical: true,
+          children: [
             {
-              name: "Eng. Eslam Alaa",
-              title: "HSE Team Leader",
-              stats: "6 Projects",
-              supervisors: "9 Supervisors",
-              isVertical: true,
-              children: [
-                {
-                  name: "Diplomatic District ",
-                  title: "Site Team",
-                  supervisors: "1 Supervisors",
-                },
-                {
-                  name: "Octagon",
-                  title: "Site Team",
-                  supervisors: "1 Supervisors",
-                },
-                {
-                  name: "H K Mutubas ",
-                  title: "Site Team",
-                  supervisors: "1 Supervisors",
-                },
-                {
-                  name: "Concrete Factory ",
-                  title: "Site Team",
-                  supervisors: "1 Supervisors",
-                },
-                {
-                  name: "Saint Catherine ",
-                  title: "Site Team",
-                  supervisors: "2 Supervisors",
-                },
-                {
-                  name: "Al Obour",
-                  title: "Site Team",
-                  supervisors: "2 Supervisors",
-                },
-              ],
+              name: "Diplomatic District",
+              title: "Site Team",
+              supervisors: "1 Supervisor",
             },
-
-            // 3. م. محمود كسبر
             {
-              name: "Eng. Mahmoud Kasper",
-              title: "HSE Team Leader",
-              stats: "3 Projects",
-              supervisors: "5 Supervisors",
-              isVertical: true,
-              children: [
-                {
-                  name: "HK Youssef El-Seddik ",
-                  title: "Site Team",
-                  supervisors: "3 Supervisors",
-                },
-                {
-                  name: "HK Nasr al Nobah",
-                  title: "Site Team",
-                  supervisors: "1 Supervisors",
-                },
-                {
-                  name: "HK Maghagha",
-                  title: "Site Team",
-                  supervisors: "1 Supervisors",
-                },
-              ],
+              name: "Octagon",
+              title: "Site Team",
+              supervisors: "1 Supervisor",
+            },
+            {
+              name: "H K Mutubas",
+              title: "Site Team",
+              supervisors: "1 Supervisor",
+            },
+            {
+              name: "Concrete Factory",
+              title: "Site Team",
+              supervisors: "1 Supervisor",
+            },
+            {
+              name: "Saint Catherine",
+              title: "Site Team",
+              supervisors: "2 Supervisors",
+            },
+            {
+              name: "Al Obour",
+              title: "Site Team",
+              supervisors: "2 Supervisors",
+            },
+          ],
+        },
+
+        // 4. م. محمود كسبر
+        {
+          name: "Eng. Mahmoud Kasper",
+          title: "HSE Team Leader",
+          stats: "3 Projects",
+          supervisors: "5 Supervisors",
+          isVertical: true,
+          children: [
+            {
+              name: "HK Youssef El-Seddik",
+              title: "Site Team",
+              supervisors: "3 Supervisors",
+            },
+            {
+              name: "HK Nasr al Nobah",
+              title: "Site Team",
+              supervisors: "1 Supervisor",
+            },
+            {
+              name: "HK Maghagha",
+              title: "Site Team",
+              supervisors: "1 Supervisor",
             },
           ],
         },
       ],
     },
   },
-  // ... (باقي الأقسام كما هي)
+  // ... (باقي الأقسام)
   {
     id: 2,
     nameEn: "Quality Control",
