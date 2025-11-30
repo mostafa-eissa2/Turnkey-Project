@@ -18,10 +18,15 @@ const TreeNode = ({ node }) => {
     <li className={`tree-li ${isVerticalLayout ? "parent-of-vertical" : ""}`}>
       <div
         className={`relative inline-block z-10 bg-white border border-gray-200 rounded-xl text-center shadow-sm hover:shadow-lg hover:border-[#C8102E] transition-all 
-        ${node.image ? "p-3 min-w-[140px] md:min-w-[180px]" : "px-3 py-2 min-w-[120px] md:min-w-[160px]"}`}
+        ${
+          node.image
+            ? // 🟢 تصغير عرض الكروت لضم الشجرة
+              "p-2 min-w-[100px] md:p-3 md:min-w-[140px]"
+            : "px-2 py-2 min-w-[90px] md:px-3 md:min-w-[130px]"
+        }`}
       >
         {node.image && (
-          <div className="w-16 h-16 mx-auto rounded-full border-2 border-[#C8102E] overflow-hidden mb-2">
+          <div className="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full border-2 border-[#C8102E] overflow-hidden mb-2">
             <img
               src={node.image}
               alt={node.name}
@@ -31,28 +36,28 @@ const TreeNode = ({ node }) => {
         )}
 
         <h5
-          className={`${node.image ? "text-sm md:text-base" : "text-xs md:text-sm"} font-bold text-gray-900 leading-tight`}
+          className={`${node.image ? "text-xs md:text-sm" : "text-[10px] md:text-xs"} font-bold text-gray-900 leading-tight`}
         >
           {node.name}
         </h5>
 
         {node.title && (
-          <p className="text-[10px] md:text-[11px] text-[#C8102E] font-bold uppercase tracking-wide mt-1">
+          <p className="text-[9px] md:text-[10px] text-[#C8102E] font-bold uppercase tracking-wide mt-1">
             {node.title}
           </p>
         )}
 
         {node.stats && (
-          <div className="mt-2 pt-2 border-t border-gray-100">
-            <span className="text-[9px] font-semibold text-gray-500 bg-gray-50 px-2 py-1 rounded-full border border-gray-200 block">
+          <div className="mt-1 md:mt-2 pt-1 md:pt-2 border-t border-gray-100">
+            <span className="text-[8px] md:text-[9px] font-semibold text-gray-500 bg-gray-50 px-1 py-0.5 md:px-2 md:py-1 rounded-full border border-gray-200 block">
               {node.stats}
             </span>
           </div>
         )}
 
         {node.supervisors && (
-          <div className="mt-2">
-            <span className="text-[10px] font-bold text-white bg-[#C8102E] px-2 py-0.5 rounded-md shadow-sm block">
+          <div className="mt-1 md:mt-2">
+            <span className="text-[8px] md:text-[9px] font-bold text-white bg-[#C8102E] px-2 py-0.5 rounded-md shadow-sm block">
               {node.supervisors}
             </span>
           </div>
@@ -71,7 +76,20 @@ const TreeNode = ({ node }) => {
 };
 
 export default function DeptModal({ dept, isOpen, onClose, lang, t }) {
-  // لا نحتاج لـ scrollRef في الموبايل الآن لأننا سنوسطه بالـ CSS
+  const scrollContainerRef = useRef(null);
+
+  useEffect(() => {
+    if (isOpen && scrollContainerRef.current) {
+      setTimeout(() => {
+        const container = scrollContainerRef.current;
+        if (container) {
+          const scrollLeft =
+            (container.scrollWidth - container.clientWidth) / 2;
+          container.scrollTo({ left: scrollLeft, behavior: "smooth" });
+        }
+      }, 100);
+    }
+  }, [isOpen]);
 
   if (!isOpen || !dept) return null;
 
@@ -121,7 +139,10 @@ export default function DeptModal({ dept, isOpen, onClose, lang, t }) {
           </div>
 
           {/* Body */}
-          <div className="p-4 md:p-8 overflow-auto bg-gray-50/50 flex-1 org-scroll relative">
+          <div
+            ref={scrollContainerRef}
+            className="p-4 md:p-8 overflow-auto bg-gray-50/50 flex-1 org-scroll relative"
+          >
             {/* Desktop Stats */}
             {dept.summary && (
               <div className="hidden md:block absolute top-8 left-8 z-30 bg-white/90 backdrop-blur-sm p-5 rounded-2xl shadow-lg border border-gray-100 w-64">
@@ -168,8 +189,8 @@ export default function DeptModal({ dept, isOpen, onClose, lang, t }) {
 
             {/* Mobile System Button */}
             {dept.systemLink && (
-              <div className="md:hidden mb-4 mt-2 sticky left-0 right-0 z-30 flex justify-center w-full">
-                <div className="w-auto flex justify-center bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm">
+              <div className="md:hidden mb-4 mt-2 sticky left-0 z-30 flex justify-center w-full">
+                <div className="w-[90vw] flex justify-center">
                   <a
                     href={dept.systemLink}
                     target="_blank"
@@ -183,13 +204,11 @@ export default function DeptModal({ dept, isOpen, onClose, lang, t }) {
             )}
 
             {dept.orgStructure ? (
-              // 🟢 التعديل هنا: إزالة min-w-max واستبدالها بـ w-full و justify-center
-              <div className="flex flex-col items-center w-full pt-0">
+              <div className="flex flex-col min-w-max pb-10 pt-0">
                 <div className="flex flex-col items-center w-full mobile-tree-scale">
                   <h3 className="text-gray-400 font-bold tracking-widest uppercase text-[10px] md:text-xs mb-4 border-b border-gray-200 pb-2 text-center w-full">
                     {t.modal_team}
                   </h3>
-
                   <div className="tree-container">
                     <ul className="tree-ul p-0 m-0">
                       <TreeNode node={dept.orgStructure} />
@@ -199,7 +218,7 @@ export default function DeptModal({ dept, isOpen, onClose, lang, t }) {
 
                 {/* Mobile Stats Card */}
                 {dept.summary && (
-                  <div className="md:hidden mt-0 mx-auto w-[95%] bg-white p-4 rounded-xl shadow-md border-t-4 border-[#C8102E] sticky left-0 right-0 bottom-4 z-20">
+                  <div className="md:hidden mt-0 mx-auto w-[90vw] bg-white p-4 rounded-xl shadow-md border-t-4 border-[#C8102E] sticky left-0 right-0 bottom-4 z-20">
                     <h4 className="text-gray-500 font-bold uppercase text-xs mb-3 text-center">
                       Department Overview
                     </h4>
