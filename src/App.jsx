@@ -77,14 +77,6 @@ export default function App() {
             <div
               className={`hidden md:flex flex-col leading-none border-l-2 pl-3 ml-1 transition-colors ${isScrolled ? "border-gray-200" : "border-white/30"}`}
             >
-              <span
-                className={`text-xs font-bold tracking-widest ${isScrolled ? "text-gray-400" : "text-white/80"}`}
-              >
-                PROJECTS
-              </span>
-              <span className="text-xs font-bold text-[#C8102E] tracking-widest">
-                SECTOR
-              </span>
             </div>
           </a>
           <div className="hidden md:flex items-center gap-8">
