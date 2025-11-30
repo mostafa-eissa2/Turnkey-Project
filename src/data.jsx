@@ -65,7 +65,7 @@ export const content = {
     experience_years: "+85",
     experience_text: "عاماً من الخبرة",
     modal_manager: "مدير الإدارة",
-    modal_system_btn: "الدخول إلى السيستم",
+    modal_system_btn: "تسجيل الدخول",
     modal_team: "الهيكل التنظيمي",
   },
 };
