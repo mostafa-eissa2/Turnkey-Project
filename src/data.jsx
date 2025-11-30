@@ -65,7 +65,7 @@ export const content = {
     experience_years: "+85",
     experience_text: "عاماً من الخبرة",
     modal_manager: "مدير الإدارة",
-    modal_system_btn: "الدخول إلى السيستم",
+    modal_system_btn: "تسجيل الدخول",
     modal_team: "الهيكل التنظيمي",
   },
 };
@@ -235,7 +235,7 @@ export const departments = [
   {
     id: 2,
     nameEn: "Quality Control",
-    nameAr: "الجودة (QC)",
+    nameAr: "مراقبة الجودة",
     icon: <Activity size={24} />,
   },
   {
@@ -246,8 +246,8 @@ export const departments = [
   },
   {
     id: 4,
-    nameEn: "Civil Execution",
-    nameAr: "تنفيذ المدني",
+    nameEn: "Civil construction",
+    nameAr: "الإنشاءات المدنية",
     icon: <Hammer size={24} />,
   },
   {
