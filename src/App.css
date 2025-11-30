@@ -16,13 +16,16 @@ body { font-family: 'Cairo', sans-serif; background-color: #fff; overflow-x: hid
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* 🟢 3. CSS الهيكل التنظيمي */
+/* 🟢 3. CSS الهيكل التنظيمي (Compact Version) */
 
 .tree-container {
   display: flex;
   justify-content: center;
   padding-top: 10px;
   width: 100%;
+  /* 🟢 تصغير للكمبيوتر ليظهر كاملاً */
+  transform: scale(0.85); 
+  transform-origin: top center;
 }
 
 .tree-ul {
@@ -39,13 +42,13 @@ body { font-family: 'Cairo', sans-serif; background-color: #fff; overflow-x: hid
   list-style-type: none;
   position: relative;
   transition: all 0.5s;
-  padding: 20px 20px 0 20px; /* مسافات موحدة */
+  padding: 20px 2px 0 2px; /* مسافات ضيقة جداً للموبايل */
 }
 
-/* الكمبيوتر */
+/* 🟢 تقليل مسافات الكمبيوتر لضم الشجرة */
 @media (min-width: 768px) {
   .tree-li {
-    padding: 30px 40px 0 40px; 
+    padding: 30px 20px 0 20px; /* كانت 40px، قللناها لـ 20px */
   }
 }
 
@@ -81,45 +84,46 @@ body { font-family: 'Cairo', sans-serif; background-color: #fff; overflow-x: hid
 .vertical-list > .tree-li:first-child { padding-top: 30px; }
 
 
-/* 🟢🟢🟢 تخصيص الموبايل (تقليل الفراغ) 🟢🟢🟢 */
+/* 🟢🟢🟢 تخصيص الموبايل (Fit Screen Mode) 🟢🟢🟢 */
 @media (max-width: 768px) {
 
   .tree-container {
     transform: none; 
     width: auto;
+    min-width: min-content; 
+    margin: 0 auto;
   }
 
   .mobile-tree-scale {
     display: flex;
     justify-content: center;
-    transform: scale(0.60); 
-    transform-origin: top center;
-    width: max-content; 
-    min-width: 100%;
-    margin: 0; 
 
-    /* ⚠️ التعديل الجوهري: سحبنا الشجرة لفوق بقوة (-50%) */
+    /* ⚠️ تصغير قوي (0.55) لتظهر الشجرة كاملة بدون سكرول */
+    transform: scale(0.55); 
+    transform-origin: top center;
+
+    /* معادلة التعويض للتصغير القوي */
+    width: 180%; 
+    margin-left: -40%; 
+
     margin-bottom: -50%; 
   }
 
+  /* أقصى ضيق للمسافات */
   .tree-li {
-    padding: 20px 5px 0 5px;
+    padding: 20px 2px 0 2px;
   }
 }
 
-/* 🟢 السكرول بار */
 .org-scroll {
-  overflow-x: auto;
+  overflow-x: auto; /* السكرول موجود كاحتياطي فقط */
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-
-  /* ⚠️ تقليل المساحة السفلية لتناسب البوكس فقط */
   padding-bottom: 120px; 
 }
 
-/* حاوية الشجرة داخل السكرول */
 .org-scroll > div.min-w-max {
   width: 100%;
   display: flex;
