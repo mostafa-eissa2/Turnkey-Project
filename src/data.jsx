@@ -84,25 +84,25 @@ export const departments = [
       safeHours: "4M+",
     },
     orgStructure: {
-      name: "Eng. Bahaa Rashed",
+      name: "Bahaa Rashed",
       title: "Turnkey Projects HSE Manager",
       image: "/Eng Bahaa.jpeg",
       children: [
         // 1. م. مصطفى عيسى
         {
-          name: "Eng. Mostafa Eissa",
+          name: "Mostafa Eissa",
           title: "HSE Coordinator",
         },
 
         // 2. م. أحمد عطية
         {
-          name: "Eng. Ahmed Attia",
+          name: "Ahmed Attia",
           title: "HSE Lead Engineer",
           stats: "3 Team Leader | 8 Projects",
           supervisors: "Total: 9 Supervisors",
           children: [
             {
-              name: "Eng. Mohamed Samy",
+              name: "Mohamed Samy",
               title: "HSE Team Leader",
               stats: "Direct Projects + Team Leader",
               supervisors: "6 Supervisors",
@@ -149,7 +149,7 @@ export const departments = [
 
                 // 🟢 العمود الثاني: م. تامر فتحي (بموازي للمشاريع)
                 {
-                  name: "Eng. Tamer Fathy",
+                  name: "Tamer Fathy",
                   title: "HSE Team Leader",
                   stats: "1 Project",
                   supervisors: "1 Supervisor",
