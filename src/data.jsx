@@ -183,7 +183,7 @@ export const departments = [
 
         // 3. م. إسلام علاء
         {
-          name: "Eng. Eslam Alaa",
+          name: "Eslam Alaa",
           title: "HSE Team Leader",
           stats: "6 Projects",
           supervisors: "9 Supervisors",
@@ -224,7 +224,7 @@ export const departments = [
 
         // 4. م. محمود كسبر
         {
-          name: "Eng. Mahmoud Kasper",
+          name: "Mahmoud Kasper",
           title: "HSE Team Leader",
           stats: "3 Projects",
           supervisors: "5 Supervisors",
