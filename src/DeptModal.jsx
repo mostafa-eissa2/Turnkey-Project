@@ -16,13 +16,13 @@ const TreeNode = ({ node }) => {
 
   return (
     <li className={`tree-li ${isVerticalLayout ? "parent-of-vertical" : ""}`}>
+      {/* 🟢 التعديل هنا: w-max يجبر الكارت ياخد عرض الكلام، و whitespace-nowrap يمنع الكسر */}
       <div
-        className={`relative inline-block z-10 bg-white border border-gray-200 rounded-xl text-center shadow-sm hover:shadow-lg hover:border-[#C8102E] transition-all 
+        className={`relative inline-block z-10 bg-white border border-gray-200 rounded-xl text-center shadow-sm hover:shadow-lg hover:border-[#C8102E] transition-all w-max
         ${
           node.image
-            ? // 🟢 تصغير عرض الكروت لضم الشجرة
-              "p-2 min-w-[100px] md:p-3 md:min-w-[140px]"
-            : "px-2 py-2 min-w-[90px] md:px-3 md:min-w-[130px]"
+            ? "p-2 min-w-[120px] md:p-3 md:min-w-[160px]"
+            : "px-3 py-2 min-w-[100px] md:px-4 md:min-w-[140px]"
         }`}
       >
         {node.image && (
@@ -35,29 +35,33 @@ const TreeNode = ({ node }) => {
           </div>
         )}
 
+        {/* 🟢 الاسم: ممنوع الكسر */}
         <h5
-          className={`${node.image ? "text-xs md:text-sm" : "text-[10px] md:text-xs"} font-bold text-gray-900 leading-tight`}
+          className={`${node.image ? "text-xs md:text-sm" : "text-[10px] md:text-xs"} font-bold text-gray-900 leading-tight whitespace-nowrap`}
         >
           {node.name}
         </h5>
 
+        {/* 🟢 المسمى الوظيفي: ممنوع الكسر */}
         {node.title && (
-          <p className="text-[9px] md:text-[10px] text-[#C8102E] font-bold uppercase tracking-wide mt-1">
+          <p className="text-[9px] md:text-[10px] text-[#C8102E] font-bold uppercase tracking-wide mt-1 whitespace-nowrap">
             {node.title}
           </p>
         )}
 
+        {/* Stats */}
         {node.stats && (
           <div className="mt-1 md:mt-2 pt-1 md:pt-2 border-t border-gray-100">
-            <span className="text-[8px] md:text-[9px] font-semibold text-gray-500 bg-gray-50 px-1 py-0.5 md:px-2 md:py-1 rounded-full border border-gray-200 block">
+            <span className="text-[8px] md:text-[9px] font-semibold text-gray-500 bg-gray-50 px-2 py-0.5 rounded-full border border-gray-200 block whitespace-nowrap">
               {node.stats}
             </span>
           </div>
         )}
 
+        {/* Supervisors */}
         {node.supervisors && (
           <div className="mt-1 md:mt-2">
-            <span className="text-[8px] md:text-[9px] font-bold text-white bg-[#C8102E] px-2 py-0.5 rounded-md shadow-sm block">
+            <span className="text-[8px] md:text-[9px] font-bold text-white bg-[#C8102E] px-2 py-0.5 rounded-md shadow-sm block whitespace-nowrap">
               {node.supervisors}
             </span>
           </div>
@@ -143,45 +147,46 @@ export default function DeptModal({ dept, isOpen, onClose, lang, t }) {
             ref={scrollContainerRef}
             className="p-4 md:p-8 overflow-auto bg-gray-50/50 flex-1 org-scroll relative"
           >
-            {/* Desktop Stats */}
+            {/* Desktop Stats Bar */}
             {dept.summary && (
-              <div className="hidden md:block absolute top-8 left-8 z-30 bg-white/90 backdrop-blur-sm p-5 rounded-2xl shadow-lg border border-gray-100 w-64">
-                <h4 className="text-[#C8102E] font-bold uppercase tracking-widest text-xs mb-4 border-b pb-2">
-                  Department Summary
-                </h4>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-red-50 rounded-lg text-[#C8102E]">
-                      <Users size={18} />
-                    </div>
-                    <div>
-                      <p className="text-xl font-bold text-gray-800">
-                        {dept.summary.totalStaff}
-                      </p>
-                      <p className="text-xs text-gray-500">Total Staff</p>
-                    </div>
+              <div className="hidden md:flex justify-center gap-6 mb-6 mt-2 w-full max-w-2xl mx-auto">
+                <div className="bg-white px-6 py-4 rounded-xl shadow-sm border border-gray-200 flex items-center gap-4 flex-1 justify-center hover:shadow-md transition-shadow">
+                  <div className="p-3 bg-red-50 rounded-lg text-[#C8102E]">
+                    <Users size={24} />
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-red-50 rounded-lg text-[#C8102E]">
-                      <Briefcase size={18} />
-                    </div>
-                    <div>
-                      <p className="text-xl font-bold text-gray-800">
-                        {dept.summary.projects}
-                      </p>
-                      <p className="text-xs text-gray-500">Active Projects</p>
-                    </div>
+                  <div className="text-center">
+                    <p className="text-2xl font-bold text-gray-800 leading-none">
+                      {dept.summary.totalStaff}
+                    </p>
+                    <p className="text-[11px] text-gray-500 uppercase font-bold tracking-wider mt-1">
+                      Total Staff
+                    </p>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-red-50 rounded-lg text-[#C8102E]">
-                      <ShieldCheck size={18} />
-                    </div>
-                    <div>
-                      <p className="text-xl font-bold text-gray-800">
-                        {dept.summary.supervisors}
-                      </p>
-                      <p className="text-xs text-gray-500">Field Supervisors</p>
-                    </div>
+                </div>
+                <div className="bg-white px-6 py-4 rounded-xl shadow-sm border border-gray-200 flex items-center gap-4 flex-1 justify-center hover:shadow-md transition-shadow">
+                  <div className="p-3 bg-red-50 rounded-lg text-[#C8102E]">
+                    <Briefcase size={24} />
+                  </div>
+                  <div className="text-center">
+                    <p className="text-2xl font-bold text-gray-800 leading-none">
+                      {dept.summary.projects}
+                    </p>
+                    <p className="text-[11px] text-gray-500 uppercase font-bold tracking-wider mt-1">
+                      Projects
+                    </p>
+                  </div>
+                </div>
+                <div className="bg-white px-6 py-4 rounded-xl shadow-sm border border-gray-200 flex items-center gap-4 flex-1 justify-center hover:shadow-md transition-shadow">
+                  <div className="p-3 bg-red-50 rounded-lg text-[#C8102E]">
+                    <ShieldCheck size={24} />
+                  </div>
+                  <div className="text-center">
+                    <p className="text-2xl font-bold text-gray-800 leading-none">
+                      {dept.summary.supervisors}
+                    </p>
+                    <p className="text-[11px] text-gray-500 uppercase font-bold tracking-wider mt-1">
+                      Supervisors
+                    </p>
                   </div>
                 </div>
               </div>
@@ -189,8 +194,8 @@ export default function DeptModal({ dept, isOpen, onClose, lang, t }) {
 
             {/* Mobile System Button */}
             {dept.systemLink && (
-              <div className="md:hidden mb-4 mt-2 sticky left-0 z-30 flex justify-center w-full">
-                <div className="w-[90vw] flex justify-center">
+              <div className="md:hidden mb-4 mt-2 sticky left-0 right-0 z-30 flex justify-center w-full">
+                <div className="w-auto flex justify-center bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm">
                   <a
                     href={dept.systemLink}
                     target="_blank"
@@ -204,11 +209,12 @@ export default function DeptModal({ dept, isOpen, onClose, lang, t }) {
             )}
 
             {dept.orgStructure ? (
-              <div className="flex flex-col min-w-max pb-10 pt-0">
+              <div className="flex flex-col items-center w-full pt-0">
                 <div className="flex flex-col items-center w-full mobile-tree-scale">
-                  <h3 className="text-gray-400 font-bold tracking-widest uppercase text-[10px] md:text-xs mb-4 border-b border-gray-200 pb-2 text-center w-full">
+                  <h3 className="text-gray-400 font-bold tracking-widest uppercase text-[10px] md:text-xs mt-2 mb-6 border-b border-gray-200 pb-2 text-center w-full">
                     {t.modal_team}
                   </h3>
+
                   <div className="tree-container">
                     <ul className="tree-ul p-0 m-0">
                       <TreeNode node={dept.orgStructure} />
