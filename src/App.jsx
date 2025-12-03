@@ -76,8 +76,7 @@ export default function App() {
             />
             <div
               className={`hidden md:flex flex-col leading-none border-l-2 pl-3 ml-1 transition-colors ${isScrolled ? "border-gray-200" : "border-white/30"}`}
-            >
-            </div>
+            ></div>
           </a>
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link, i) => (
@@ -325,7 +324,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* STATS */}
+        {/* 🟢 STATS SECTION (STACKED ON MOBILE) 🟢 */}
         <section className="relative py-24 bg-[#C8102E] overflow-hidden">
           <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden">
             <img
@@ -334,28 +333,32 @@ export default function App() {
               className="w-[800px] opacity-10 grayscale rotate-12 scale-150 mix-blend-multiply"
             />
           </div>
+
           <div className="container mx-auto px-6 relative z-10">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center text-white">
+            {/* ⚠️ التغيير هنا: flex-col للموبايل، و md:flex-row للكمبيوتر */}
+            <div className="flex flex-col md:flex-row flex-wrap justify-center items-center gap-12 md:gap-16 text-center text-white">
               {stats.map((stat) => (
                 <div
                   key={stat.id}
-                  className="flex flex-col items-center justify-center group"
+                  className="flex flex-col items-center justify-center group min-w-[150px]"
                 >
                   <motion.div
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
-                    className="mb-6 p-5 bg-white/10 rounded-2xl text-white backdrop-blur-md shadow-xl group-hover:bg-white group-hover:text-[#C8102E] transition-all duration-500"
+                    className="mb-4 p-4 bg-white/10 rounded-2xl text-white backdrop-blur-md shadow-xl group-hover:bg-white group-hover:text-[#C8102E] transition-all duration-500"
                   >
                     {stat.icon}
                   </motion.div>
-                  <h3 className="text-5xl md:text-6xl font-black mb-3 tracking-tighter flex items-baseline justify-center gap-1">
+
+                  <h3 className="text-4xl md:text-6xl font-black mb-2 tracking-tighter flex items-baseline justify-center gap-1">
                     <AnimatedCounter value={stat.value} />
                   </h3>
+
                   <motion.p
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    className="text-lg font-bold text-red-100/80 uppercase tracking-widest"
+                    className="text-sm md:text-lg font-bold text-red-100/80 uppercase tracking-widest"
                   >
                     {isRTL ? stat.labelAr : stat.labelEn}
                   </motion.p>
