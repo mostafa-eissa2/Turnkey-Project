@@ -13,6 +13,7 @@ import {
   Briefcase,
   Clock,
   Wrench,
+  ClipboardList, // 🟢 تم إضافة أيقونة PMO
 } from "lucide-react";
 
 export const content = {
@@ -65,7 +66,7 @@ export const content = {
     experience_years: "+85",
     experience_text: "عاماً من الخبرة",
     modal_manager: "مدير الإدارة",
-    modal_system_btn: "تسجيل الدخول",
+    modal_system_btn: "الدخول إلى السيستم",
     modal_team: "الهيكل التنظيمي",
   },
 };
@@ -74,7 +75,7 @@ export const departments = [
   {
     id: 1,
     nameEn: "Occupational safety, health and environment",
-    nameAr: "السلامة و الصحة المهنية و البيئة",
+    nameAr: "السلامة والصحة المهنية",
     icon: <HardHat size={24} />,
     systemLink: "https://turnkey-hse-dashboard.vercel.app/",
     summary: {
@@ -84,35 +85,34 @@ export const departments = [
       safeHours: "4M+",
     },
     orgStructure: {
-      name: "Bahaa Rashed",
+      name: "Eng. Bahaa Rashed",
       title: "Turnkey Projects HSE Manager",
       image: "/Eng Bahaa.jpeg",
       children: [
         // 1. م. مصطفى عيسى
         {
-          name: "Mostafa Eissa",
+          name: "Eng. Mostafa Eissa",
           title: "HSE Coordinator",
         },
 
         // 2. م. أحمد عطية
         {
-          name: "Ahmed Attia",
+          name: "Eng. Ahmed Attia",
           title: "HSE Lead Engineer",
-          stats: "3 Team Leader | 8 Projects",
-          supervisors: "Total: 9 Supervisors",
+          stats: "1 Team Leader | 8 Projects",
+          supervisors: "Total: 8 Supervisors",
           children: [
             {
-              name: "Mohamed Samy",
+              name: "Eng. Mohamed Samy",
               title: "HSE Team Leader",
               stats: "Direct Projects + Team Leader",
               supervisors: "6 Supervisors",
-              // ⚠️ هنا شلنا isVertical عشان ينقسم تحته لعمودين متوازيين
               children: [
-                // 🟢 العمود الأول: المشاريع المباشرة تحت محمد سامي
+                // العمود الأول: المشاريع المباشرة تحت محمد سامي
                 {
-                  name: "Direct Projects", // اسم المجموعة
+                  name: "Direct Projects",
                   title: "Site Operations",
-                  isVertical: true, // المشاريع دي هتترص تحت بعض
+                  isVertical: true,
                   children: [
                     {
                       name: "New Alamin",
@@ -140,16 +140,20 @@ export const departments = [
                       supervisors: "1 Supervisor",
                     },
                     {
+                      name: "10th of Ramadan",
+                      title: "Site Team",
+                      supervisors: "0 Supervisors",
+                    },
+                    {
                       name: "El Firdous",
                       title: "Site Team",
                       supervisors: "0 Supervisors",
                     },
                   ],
                 },
-
-                // 🟢 العمود الثاني: م. تامر فتحي (بموازي للمشاريع)
+                // العمود الثاني: م. تامر فتحي
                 {
-                  name: "Tamer Fathy",
+                  name: "Eng. Tamer Fathy",
                   title: "HSE Team Leader",
                   stats: "1 Project",
                   supervisors: "1 Supervisor",
@@ -162,20 +166,6 @@ export const departments = [
                     },
                   ],
                 },
-                {
-                  name: "Team Leader",
-                  title: "HSE Team Leader",
-                  stats: "1 Project",
-                  supervisors: "1 Supervisor",
-                  isVertical: true,
-                  children: [
-                    {
-                      name: "10th of Ramadan",
-                      title: "Site Team",
-                      supervisors: "1 Supervisor",
-                    },
-                  ],
-                },
               ],
             },
           ],
@@ -183,7 +173,7 @@ export const departments = [
 
         // 3. م. إسلام علاء
         {
-          name: "Eslam Alaa",
+          name: "Eng. Eslam Alaa",
           title: "HSE Team Leader",
           stats: "6 Projects",
           supervisors: "9 Supervisors",
@@ -224,7 +214,7 @@ export const departments = [
 
         // 4. م. محمود كسبر
         {
-          name: "Mahmoud Kasper",
+          name: "Eng. Mahmoud Kasper",
           title: "HSE Team Leader",
           stats: "3 Projects",
           supervisors: "5 Supervisors",
@@ -250,7 +240,8 @@ export const departments = [
       ],
     },
   },
-  // ... (باقي الأقسام)
+
+  // ... باقي الأقسام
   {
     id: 2,
     nameEn: "Quality Control",
@@ -305,7 +296,14 @@ export const departments = [
     nameAr: "الشؤون القانونية",
     icon: <Scale size={24} />,
   },
-  { id: 8, nameEn: "Finance", nameAr: "الماليات", icon: <Users size={24} /> },
+
+  // 🟢 التعديل الوحيد: استبدال الماليات بـ PMO
+  {
+    id: 8,
+    nameEn: "PMO",
+    nameAr: "إدارة المشروعات",
+    icon: <ClipboardList size={24} />,
+  },
 ];
 
 export const projects = [
