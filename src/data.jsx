@@ -13,7 +13,12 @@ import {
   Briefcase,
   Clock,
   Wrench,
-  ClipboardList, // 🟢 تم إضافة أيقونة PMO
+  ClipboardList,
+  CircleDollarSign,
+  Landmark,
+  Tractor, // 🟢 الأيقونة الجديدة للمعدات (جرار/معدة ثقيلة)
+  Forklift, // 🟢 ضيف دي مكان Tractor
+  Building2,
 } from "lucide-react";
 
 export const content = {
@@ -72,10 +77,11 @@ export const content = {
 };
 
 export const departments = [
+  // 1. HSE
   {
     id: 1,
     nameEn: "Occupational safety, health and environment",
-    nameAr: "السلامة والصحة المهنية",
+    nameAr: "السلامة والصحة المهنية والبية",
     icon: <HardHat size={24} />,
     systemLink: "https://turnkey-hse-dashboard.vercel.app/",
     summary: {
@@ -85,30 +91,26 @@ export const departments = [
       safeHours: "4M+",
     },
     orgStructure: {
-      name: "Eng. Bahaa Rashed",
+      name: "Bahaa Rashed",
       title: "Turnkey Projects HSE Manager",
       image: "/Eng Bahaa.jpeg",
       children: [
-        // 1. م. مصطفى عيسى
         {
-          name: "Eng. Mostafa Eissa",
+          name: "Mostafa Eissa",
           title: "HSE Coordinator",
         },
-
-        // 2. م. أحمد عطية
         {
-          name: "Eng. Ahmed Attia",
+          name: "Ahmed Attia",
           title: "HSE Lead Engineer",
           stats: "1 Team Leader | 8 Projects",
           supervisors: "Total: 8 Supervisors",
           children: [
             {
-              name: "Eng. Mohamed Samy",
+              name: "Mohamed Samy",
               title: "HSE Team Leader",
               stats: "Direct Projects + Team Leader",
               supervisors: "6 Supervisors",
               children: [
-                // العمود الأول: المشاريع المباشرة تحت محمد سامي
                 {
                   name: "Direct Projects",
                   title: "Site Operations",
@@ -151,9 +153,8 @@ export const departments = [
                     },
                   ],
                 },
-                // العمود الثاني: م. تامر فتحي
                 {
-                  name: "Eng. Tamer Fathy",
+                  name: "Tamer Fathy",
                   title: "HSE Team Leader",
                   stats: "1 Project",
                   supervisors: "1 Supervisor",
@@ -170,10 +171,8 @@ export const departments = [
             },
           ],
         },
-
-        // 3. م. إسلام علاء
         {
-          name: "Eng. Eslam Alaa",
+          name: "Eslam Alaa",
           title: "HSE Team Leader",
           stats: "6 Projects",
           supervisors: "9 Supervisors",
@@ -211,10 +210,8 @@ export const departments = [
             },
           ],
         },
-
-        // 4. م. محمود كسبر
         {
-          name: "Eng. Mahmoud Kasper",
+          name: "Mahmoud Kasper",
           title: "HSE Team Leader",
           stats: "3 Projects",
           supervisors: "5 Supervisors",
@@ -241,37 +238,61 @@ export const departments = [
     },
   },
 
-  // ... باقي الأقسام
+  // 🟢 2. قسم الإنشاءات (تم نقله هنا ليكون بعد السلامة مباشرة)
+  {
+    id: 4,
+    nameEn: "Construction",
+    nameAr: "الإنشاءات",
+    icon: <Building2 size={24} />,
+    orgStructure: {
+      name: "Construction Manager",
+      title: "Head of Construction Sector",
+      children: [
+        {
+          name: "Civil Execution",
+          title: "Department",
+          children: [
+            { name: "Site Engineers", title: "Civil Team" },
+            { name: "Surveyors", title: "Civil Team" },
+          ],
+        },
+        {
+          name: "Electrical Execution",
+          title: "Department",
+          children: [
+            { name: "MV Team", title: "Electrical Team" },
+            { name: "Cabling Team", title: "Electrical Team" },
+          ],
+        },
+      ],
+    },
+  },
+
+  // 3. الجودة
   {
     id: 2,
     nameEn: "Quality Control",
     nameAr: "مراقبة الجودة",
     icon: <Activity size={24} />,
   },
+
+  // 4. المكتب الفني
   {
     id: 3,
     nameEn: "Technical Office",
     nameAr: "المكتب الفني",
     icon: <FileText size={24} />,
   },
-  {
-    id: 4,
-    nameEn: "Civil construction",
-    nameAr: "الإنشاءات المدنية",
-    icon: <Hammer size={24} />,
-  },
-  {
-    id: 5,
-    nameEn: "Electrical Execution",
-    nameAr: "تنفيذ الكهرباء",
-    icon: <Zap size={24} />,
-  },
+
+  // 🟢 5. المعدات (تم تغيير الأيقونة لـ Tractor)
   {
     id: 11,
-    nameEn: "Maintenance",
-    nameAr: "الصيانة",
-    icon: <Wrench size={24} />,
+    nameEn: "Equipments",
+    nameAr: "المعدات",
+    icon: <Forklift size={24} />,
   },
+
+  // باقي الأقسام
   {
     id: 6,
     nameEn: "Surveying & GIS",
@@ -291,18 +312,16 @@ export const departments = [
     icon: <UserCog size={24} />,
   },
   {
-    id: 7,
-    nameEn: "Legal Affairs",
-    nameAr: "الشؤون القانونية",
-    icon: <Scale size={24} />,
-  },
-
-  // 🟢 التعديل الوحيد: استبدال الماليات بـ PMO
-  {
     id: 8,
     nameEn: "PMO",
     nameAr: "إدارة المشروعات",
     icon: <ClipboardList size={24} />,
+  },
+  {
+    id: 12,
+    nameEn: "Government Relations",
+    nameAr: "العلاقات الحكومية",
+    icon: <Landmark size={24} />,
   },
 ];
 
@@ -353,6 +372,13 @@ export const stats = [
     labelEn: "Active Projects",
     labelAr: "مشروع جاري",
     icon: <Zap size={32} />,
+  },
+  {
+    id: 5,
+    value: "10B+",
+    labelEn: "Work Volume",
+    labelAr: "حجم الأعمال (ج.م)",
+    icon: <CircleDollarSign size={32} />,
   },
   {
     id: 2,
