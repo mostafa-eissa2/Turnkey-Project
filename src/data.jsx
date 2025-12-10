@@ -16,7 +16,7 @@ import {
   ClipboardList,
   CircleDollarSign,
   Landmark,
-  Forklift, // أيقونة المعدات (الونش/اللودر)
+  Forklift,
   Building2,
 } from "lucide-react";
 
@@ -90,7 +90,7 @@ export const departments = [
       safeHours: "4M+",
     },
     orgStructure: {
-      name: "Bahaa Rashed",
+      name: "Eng. Bahaa Rashed",
       title: "Turnkey Projects HSE Manager",
       image: "/Eng Bahaa.jpeg",
       children: [
@@ -250,7 +250,6 @@ export const departments = [
     icon: <FileText size={24} />,
   },
 
-  // قسم الإنشاءات
   {
     id: 4,
     nameEn: "Construction",
@@ -280,14 +279,12 @@ export const departments = [
     },
   },
 
-  // المعدات
   {
     id: 11,
     nameEn: "Equipments",
     nameAr: "المعدات",
     icon: <Forklift size={24} />,
   },
-
   {
     id: 6,
     nameEn: "Surveying & GIS",
@@ -325,16 +322,133 @@ export const projects = [
     titleEn: "High Voltage Projects",
     titleAr: "مشروعات الجهد العالي",
     img: "/high 1.jpeg",
+    // 🟢 إضافة البيانات التفصيلية: الطول + الجهد
+    details: [
+      {
+        nameEn: "Dahshur Project",
+        nameAr: "مشروع وصلة دهشور",
+        descEn:
+          "Interconnection between Sakakin 52 Substation and Sakakin 68 Substation using 220 kV underground cables.",
+        descAr:
+          "ربط بين محطة محولات سكاكين 52 ومحطة سكاكين 68 باستخدام كابلات أرضية جهد 220 كيلوفولت.",
+        startDate: "2023-12-25",
+        progress: 71,
+        stages: 9,
+        length: "5 KM", // محطة (ليس لها طول مسار)
+        voltage: "220 kV",
+        img: "/high 1.jpeg",
+      },
+      {
+        nameEn: "Elferdous Project",
+        nameAr: "مشروع الفردوس",
+        descEn:
+          "Interconnection between Sakakin 34 Substation and Sakakin 28 Substation using 220 kV underground cables.",
+        descAr:
+          "ربط بين محطة محولات سكاكين 34 ومحطة سكاكين 28 باستخدام كابلات أرضية جهد 220 كيلوفولت.",
+        startDate: "2024-02-10",
+        progress: 94,
+        stages: 4,
+        length: "2.3 KM", // 🟢 طول المسار
+        voltage: "220 kV", // 🟢 الجهد
+        img: "/high 1.jpeg",
+      },
+      {
+        nameEn: "Alex Port Project",
+        nameAr: "مشروع ميناء الإسكندرية",
+        descEn:
+          "Interconnection between Alexandria Port Substation and El-Wardian Substation using 66 kV underground cables.",
+        descAr:
+          "ربط بين محطة محولات ميناء الإسكندرية ومحطة الورديان باستخدام كابلات أرضية جهد 66 كيلوفولت.",
+        startDate: "2023-09-11",
+        progress: 94,
+        stages: 19,
+        length: "11.6 KM", // 🟢 طول المسار
+        voltage: "66 kV", // 🟢 الجهد المزدوج
+        img: "/high 1.jpeg",
+      },
+      {
+        nameEn: "Abu Qir 66 kV Project",
+        nameAr: "مشروع أبو قير 66 ك.ف",
+        descEn:
+          "Interconnection between East Alexandria Substation and Montaza Substation using 66 kV underground cables.",
+        descAr:
+          "ربط بين محطة محولات شرق الإسكندرية ومحطة المنتزة باستخدام كابلات أرضية جهد 66 كيلوفولت.",
+        startDate: "2025-10-30",
+        progress: 0,
+        stages: 13,
+        length: "8.3 KM", // 🟢 طول المسار
+        voltage: "66 kV", // 🟢 الجهد المزدوج
+        img: "/high 1.jpeg",
+      },
+      {
+        nameEn: "EL-Obour Project",
+        nameAr: "مشروع العبور",
+        descEn:
+          "Interconnection between Obour 5 Substation and Obour 3 Substation using 66 kV underground cables.",
+        descAr:
+          "ربط بين محطة محولات العبور 5 ومحطة العبور 3 باستخدام كابلات أرضية جهد 66 كيلوفولت.",
+        startDate: "18-08-2025",
+        progress: 36,
+        stages: 6,
+        length: "4 KM", // 🟢 طول المسار
+        voltage: "66 kV", // 🟢 الجهد المزدوج
+        img: "/high 1.jpeg",
+      },
+      {
+        nameEn: "10th of Ramadan Project 66 kV",
+        nameAr: "مشروع العاشر من رمضان 66 ك.ف",
+        descEn:
+          "Interconnection between East 10th of Ramadan Substation and Zizinia Substation using 66 kV underground cables.",
+        descAr:
+          "ربط بين محطة محولات شرق العاشر من رمضان ومحطة زيزينيا باستخدام كابلات أرضية جهد 66 كيلوفولت.",
+        startDate: "2025-11-01",
+        progress: 0,
+        stages: 8,
+        length: "5.5 KM", // 🟢 طول المسار
+        voltage: "66 kV", // 🟢 الجهد المزدوج
+        img: "/high 1.jpeg",
+      },
+      {
+        nameEn: "Abu Qir 220 kV Project",
+        nameAr: "مشروع أبو قير 220 ك.ف",
+        descEn:
+          "Interconnection between East Alexandria Substation and Abis El-Seouf Substation using 220 kV underground cables.",
+        descAr:
+          "ربط بين محطة محولات شرق الإسكندرية ومحطة سكاكين أبيس السيوف باستخدام كابلات أرضية جهد 220 كيلوفولت.",
+        startDate: "2025-12-30",
+        progress: 0,
+        stages: 9,
+        length: "7.5 KM", // 🟢 طول المسار
+        voltage: "220 kV", // 🟢 الجهد المزدوج
+        img: "/high 1.jpeg",
+      },
+      {
+        nameEn: "Gardenia 220 kV Project",
+        nameAr: "مشروع جاردينيا 220 ك.ف",
+        descEn:
+          "Interconnection linking Al-Mosheer Substation with both Gardenia and Cairo West Substations using 220 kV underground cables.",
+        descAr:
+          "ربط محطة محولات المشير بكل من محطتي جاردينيا وغرب القاهرة باستخدام كابلات أرضية جهد 220 كيلوفولت.",
+        startDate: "2026-01-01",
+        progress: 0,
+        stages: 16,
+        length: "10.2 KM", // 🟢 طول المسار
+        voltage: "220 kV", // 🟢 الجهد المزدوج
+        img: "/high 1.jpeg",
+      },
+    ],
   },
   {
     titleEn: "Medium Voltage Projects",
     titleAr: "مشروعات الجهد المتوسط",
     img: "/Medium 2.jpeg",
+    details: [],
   },
   {
     titleEn: "Hayah Karima Projects",
     titleAr: "مشروعات حياة كريمة",
     img: "/Haya Karama 1.jpeg",
+    details: [],
   },
 ];
 
@@ -345,7 +459,6 @@ export const leaders = [
     name: "Eng. Ahmed Elsewedy",
     img: "/Ahmed-Elsewedy-editing.jpg",
   },
-  // 🟢 العضو الجديد في المنتصف
   {
     roleEn: "VP Commercial Egypt - Elsewedy Cables",
     roleAr: "نائب الرئيس للقطاع التجاري (مصر) - السويدي للكابلات",
