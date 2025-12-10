@@ -190,7 +190,7 @@ export default function App() {
         <header id="home" className="relative h-[90vh] flex items-center">
           <div className="absolute inset-0 z-0">
             <img
-              src="/cover.jpeg"
+              src="/cover.png"
               alt="Engineering"
               className="w-full h-full object-cover brightness-[0.4]"
             />
