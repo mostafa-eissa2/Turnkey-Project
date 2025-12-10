@@ -16,8 +16,7 @@ import {
   ClipboardList,
   CircleDollarSign,
   Landmark,
-  Tractor, // 🟢 الأيقونة الجديدة للمعدات (جرار/معدة ثقيلة)
-  Forklift, // 🟢 ضيف دي مكان Tractor
+  Forklift, // أيقونة المعدات (الونش/اللودر)
   Building2,
 } from "lucide-react";
 
@@ -71,7 +70,7 @@ export const content = {
     experience_years: "+85",
     experience_text: "عاماً من الخبرة",
     modal_manager: "مدير الإدارة",
-    modal_system_btn: "الدخول إلى السيستم",
+    modal_system_btn: "تسجيل الدخول",
     modal_team: "الهيكل التنظيمي",
   },
 };
@@ -81,7 +80,7 @@ export const departments = [
   {
     id: 1,
     nameEn: "Occupational safety, health and environment",
-    nameAr: "السلامة والصحة المهنية والبية",
+    nameAr: "السلامة والصحة المهنية والبيئة",
     icon: <HardHat size={24} />,
     systemLink: "https://turnkey-hse-dashboard.vercel.app/",
     summary: {
@@ -238,7 +237,20 @@ export const departments = [
     },
   },
 
-  // 🟢 2. قسم الإنشاءات (تم نقله هنا ليكون بعد السلامة مباشرة)
+  {
+    id: 2,
+    nameEn: "Quality Control",
+    nameAr: "مراقبة الجودة",
+    icon: <Activity size={24} />,
+  },
+  {
+    id: 3,
+    nameEn: "Technical Office",
+    nameAr: "المكتب الفني",
+    icon: <FileText size={24} />,
+  },
+
+  // قسم الإنشاءات
   {
     id: 4,
     nameEn: "Construction",
@@ -268,23 +280,7 @@ export const departments = [
     },
   },
 
-  // 3. الجودة
-  {
-    id: 2,
-    nameEn: "Quality Control",
-    nameAr: "مراقبة الجودة",
-    icon: <Activity size={24} />,
-  },
-
-  // 4. المكتب الفني
-  {
-    id: 3,
-    nameEn: "Technical Office",
-    nameAr: "المكتب الفني",
-    icon: <FileText size={24} />,
-  },
-
-  // 🟢 5. المعدات (تم تغيير الأيقونة لـ Tractor)
+  // المعدات
   {
     id: 11,
     nameEn: "Equipments",
@@ -292,7 +288,6 @@ export const departments = [
     icon: <Forklift size={24} />,
   },
 
-  // باقي الأقسام
   {
     id: 6,
     nameEn: "Surveying & GIS",
@@ -349,6 +344,13 @@ export const leaders = [
     roleAr: "الرئيس التنفيذي لشركة السويدي للكهرباء",
     name: "Eng. Ahmed Elsewedy",
     img: "/Ahmed-Elsewedy-editing.jpg",
+  },
+  // 🟢 العضو الجديد في المنتصف
+  {
+    roleEn: "Commercial Egypt VP",
+    roleAr: "نائب الرئيس للقطاع التجاري - مصر",
+    name: "Eng. Ahmed Nasser",
+    img: "/Ahmed Nasser.png",
   },
   {
     roleEn: "Turnkey Projects General Manager",
