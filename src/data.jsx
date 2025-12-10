@@ -347,8 +347,8 @@ export const leaders = [
   },
   // 🟢 العضو الجديد في المنتصف
   {
-    roleEn: "Commercial Egypt VP",
-    roleAr: "نائب الرئيس للقطاع التجاري - مصر",
+    roleEn: "VP Commercial Egypt - Elsewedy Cables",
+    roleAr: "نائب الرئيس للقطاع التجاري (مصر) - السويدي للكابلات",
     name: "Eng. Ahmed Nasser",
     img: "/Ahmed Nasser.png",
   },
