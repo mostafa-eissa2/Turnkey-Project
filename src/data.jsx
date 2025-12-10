@@ -341,7 +341,7 @@ export const projects = [
 export const leaders = [
   {
     roleEn: "President & CEO Elsewedy Electric",
-    roleAr: "الرئيس التنفيذي لشركة السويدي للكهرباء",
+    roleAr: "الرئيس التنفيذي لشركة السويدي اليكتريك",
     name: "Eng. Ahmed Elsewedy",
     img: "/Ahmed-Elsewedy-editing.jpg",
   },
