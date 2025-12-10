@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion, useInView, animate } from "framer-motion";
+import { motion, useInView, animate, AnimatePresence } from "framer-motion";
 import {
   Globe,
   ArrowRight,
@@ -9,9 +9,12 @@ import {
   X,
   Plus,
   LogIn,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import "./App.css";
 import DeptModal from "./DeptModal";
+import ProjectModal from "./ProjectModal"; // 🟢 1. استيراد المودال الجديد
 import { content, departments, projects, leaders, stats } from "./data";
 
 export default function App() {
@@ -19,8 +22,16 @@ export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // States for Department Modal
   const [selectedDept, setSelectedDept] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // 🟢 2. States for Project Modal (المتغيرات الجديدة)
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
+
+  // Slider State
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const t = content[lang];
   const isRTL = lang === "ar";
@@ -33,9 +44,34 @@ export default function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Open Dept Modal
   const openDeptModal = (dept) => {
     setSelectedDept(dept);
     setIsModalOpen(true);
+  };
+
+  // 🟢 3. Function to open Project Modal
+  const openProjectModal = (category) => {
+    setSelectedCategory(category);
+    setIsProjectModalOpen(true);
+  };
+
+  // Slider Navigation
+  const nextProject = () => {
+    setActiveIndex((prev) => (prev + 1) % projects.length);
+  };
+
+  const prevProject = () => {
+    setActiveIndex((prev) => (prev - 1 + projects.length) % projects.length);
+  };
+
+  // Determine Card Position
+  const getCardStyle = (index) => {
+    if (index === activeIndex) return "center";
+    const len = projects.length;
+    if (index === (activeIndex - 1 + len) % len) return "left";
+    if (index === (activeIndex + 1) % len) return "right";
+    return "hidden";
   };
 
   const navLinks = [
@@ -48,6 +84,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen selection:bg-[#C8102E] selection:text-white relative">
+      {/* 🟢 Render Modals */}
       <DeptModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -56,10 +93,21 @@ export default function App() {
         t={t}
       />
 
+      <ProjectModal
+        isOpen={isProjectModalOpen}
+        onClose={() => setIsProjectModalOpen(false)}
+        category={selectedCategory}
+        lang={lang}
+      />
+
       {/* NAVBAR */}
       <nav
         dir="ltr"
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-white/95 backdrop-blur-md shadow-md py-3" : "bg-transparent py-5"}`}
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+          isScrolled
+            ? "bg-white/95 backdrop-blur-md shadow-md py-3"
+            : "bg-transparent py-5"
+        }`}
       >
         <div className="container mx-auto px-6 flex justify-between items-center">
           <a
@@ -69,7 +117,9 @@ export default function App() {
             <img
               src="/logo.png"
               alt="Elsewedy Logo"
-              className={`object-contain transition-all duration-300 ${isScrolled ? "h-10" : "h-12 brightness-0 invert"}`}
+              className={`object-contain transition-all duration-300 ${
+                isScrolled ? "h-10" : "h-12 brightness-0 invert"
+              }`}
               style={{
                 filter: isScrolled ? "none" : "brightness(0) invert(1)",
               }}
@@ -83,7 +133,9 @@ export default function App() {
               <a
                 key={i}
                 href={`#${link.id}`}
-                className={`text-sm font-bold uppercase tracking-wider transition-colors hover:text-[#C8102E] ${isScrolled ? "text-gray-600" : "text-white"}`}
+                className={`text-sm font-bold uppercase tracking-wider transition-colors hover:text-[#C8102E] ${
+                  isScrolled ? "text-gray-600" : "text-white"
+                }`}
               >
                 {lang === "en" ? link.nameEn : link.nameAr}
               </a>
@@ -92,7 +144,11 @@ export default function App() {
           <div className="flex items-center gap-4">
             <button
               onClick={() => setLang(lang === "en" ? "ar" : "en")}
-              className={`text-sm font-bold transition-colors flex items-center gap-2 border px-3 py-1 rounded-full ${isScrolled ? "border-gray-200 text-gray-500 hover:border-[#C8102E]" : "border-white/30 text-white hover:bg-white/10"}`}
+              className={`text-sm font-bold transition-colors flex items-center gap-2 border px-3 py-1 rounded-full ${
+                isScrolled
+                  ? "border-gray-200 text-gray-500 hover:border-[#C8102E]"
+                  : "border-white/30 text-white hover:bg-white/10"
+              }`}
             >
               <Globe size={16} />
               <span>{lang === "en" ? "عربي" : "En"}</span>
@@ -324,7 +380,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* 🟢 STATS SECTION (STACKED ON MOBILE) 🟢 */}
+        {/* STATS SECTION */}
         <section className="relative py-24 bg-[#C8102E] overflow-hidden">
           <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden">
             <img
@@ -333,9 +389,7 @@ export default function App() {
               className="w-[800px] opacity-10 grayscale rotate-12 scale-150 mix-blend-multiply"
             />
           </div>
-
           <div className="container mx-auto px-6 relative z-10">
-            {/* ⚠️ التغيير هنا: flex-col للموبايل، و md:flex-row للكمبيوتر */}
             <div className="flex flex-col md:flex-row flex-wrap justify-center items-center gap-12 md:gap-16 text-center text-white">
               {stats.map((stat) => (
                 <div
@@ -350,11 +404,9 @@ export default function App() {
                   >
                     {stat.icon}
                   </motion.div>
-
                   <h3 className="text-4xl md:text-6xl font-black mb-2 tracking-tighter flex items-baseline justify-center gap-1">
                     <AnimatedCounter value={stat.value} />
                   </h3>
-
                   <motion.p
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -368,43 +420,92 @@ export default function App() {
           </div>
         </section>
 
-        {/* 🟢 PROJECTS SECTION (RESTORED TO ORIGINAL LANDSCAPE SLIDER) 🟢 */}
+        {/* 🟢 PROJECTS SECTION (EXPANDABLE LUXURY GALLERY - TRANSLATED) 🟢 */}
         <section
           id="projects"
-          className="py-16 bg-[#111] text-white overflow-hidden"
+          className="py-24 bg-[#050505] text-white relative overflow-hidden"
         >
-          <div className="container mx-auto px-6 mb-8 flex items-end justify-between">
-            <h2 className="text-2xl font-bold">{t.projects_title}</h2>
-            <div className="hidden md:flex gap-1.5">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#C8102E]"></div>
-              <div className="w-1.5 h-1.5 rounded-full bg-gray-700"></div>
-              <div className="w-1.5 h-1.5 rounded-full bg-gray-700"></div>
-            </div>
-          </div>
+          <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 pointer-events-none"></div>
 
-          {/* 🟢 The Slider (Original Design) */}
-          <div className="flex gap-5 overflow-x-auto px-6 pb-6 hide-scrollbar snap-x">
-            {projects.map((proj, i) => (
-              // الكارت الأصلي بالعرض (h-280px)
-              <div
-                key={i}
-                className="min-w-[300px] md:min-w-[400px] h-[280px] relative rounded-xl overflow-hidden snap-center group cursor-pointer border border-gray-800 hover:border-[#C8102E] transition-colors"
-              >
-                <img
-                  src={proj.img}
-                  alt={proj.titleEn}
-                  className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
-                />
-                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/60 to-transparent">
-                  <h3 className="text-xl font-bold mb-1">
-                    {isRTL ? proj.titleAr : proj.titleEn}
-                  </h3>
-                  <p className="text-xs text-gray-400 group-hover:text-[#C8102E] transition-colors">
-                    {lang === "en" ? "View Case Study" : "عرض التفاصيل"}
-                  </p>
+          <div className="container mx-auto px-6 relative z-10">
+            {/* Header - (تم تعريب العناوين هنا) */}
+            <div className="text-center mb-16">
+              <span className="text-[#C8102E] font-bold tracking-[0.2em] uppercase text-xs mb-3 block">
+                {lang === "en"
+                  ? "Excellence in Execution"
+                  : "التميز في التنفيذ"}
+              </span>
+              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter">
+                {lang === "en" ? "Our " : "سجل "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">
+                  {lang === "en" ? "Portfolio" : "أعمالنا"}
+                </span>
+              </h2>
+            </div>
+
+            {/* The Expandable Cards Container */}
+            <div className="flex flex-col md:flex-row gap-4 h-[600px] md:h-[550px] w-full">
+              {projects.map((proj, i) => (
+                <div
+                  key={i}
+                  onClick={() => openProjectModal(proj)}
+                  className="relative flex-1 hover:flex-[3] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] rounded-3xl overflow-hidden cursor-pointer group border border-white/5 hover:border-[#C8102E]/50"
+                >
+                  <img
+                    src={proj.img}
+                    alt={proj.titleEn}
+                    className="absolute inset-0 w-full h-full object-cover filter brightness-[0.6] group-hover:brightness-100 group-hover:scale-110 transition-all duration-1000"
+                  />
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 group-hover:opacity-80 transition-opacity duration-500" />
+
+                  <div className="absolute bottom-0 left-0 w-full p-6 md:p-8 flex flex-col justify-end h-full">
+                    <div className="mb-auto self-end opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-4 group-hover:translate-x-0">
+                      <div className="w-12 h-12 rounded-full bg-[#C8102E] flex items-center justify-center shadow-lg text-white">
+                        {isRTL ? (
+                          <ArrowLeft size={24} />
+                        ) : (
+                          <ArrowRight size={24} />
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                      <span className="text-4xl font-black text-white/10 group-hover:text-white/20 absolute -top-12 left-0 transition-colors duration-500">
+                        0{i + 1}
+                      </span>
+
+                      <span className="text-[#C8102E] text-[10px] font-bold uppercase tracking-widest mb-2 block opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100">
+                        {lang === "en" ? "Sector Category" : "تصنيف القطاع"}
+                      </span>
+
+                      <h3
+                        className={`font-bold text-white leading-tight mb-2 transition-all duration-500 whitespace-nowrap md:whitespace-normal
+                                ${i === 0 ? "text-2xl md:text-3xl" : "text-xl md:text-2xl"}
+                             `}
+                      >
+                        {isRTL ? proj.titleAr : proj.titleEn}
+                      </h3>
+
+                      <p className="text-gray-300 text-xs md:text-sm font-medium opacity-0 group-hover:opacity-100 h-0 group-hover:h-auto overflow-hidden transition-all duration-500 delay-100">
+                        {lang === "en"
+                          ? "Click to view project details & statistics"
+                          : "اضغط لعرض تفاصيل وإحصائيات المشاريع"}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none md:group-hover:opacity-0 transition-opacity duration-300">
+                    <h3 className="hidden md:block text-2xl font-bold text-white/50 tracking-widest uppercase rotate-[-90deg] whitespace-nowrap">
+                      {(isRTL ? proj.titleAr : proj.titleEn)
+                        .split(" ")
+                        .slice(0, 2)
+                        .join(" ")}
+                    </h3>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </section>
       </main>
