@@ -90,7 +90,7 @@ export const departments = [
       safeHours: "4M+",
     },
     orgStructure: {
-      name: "Eng. Bahaa Rashed",
+      name: "Bahaa Rashed",
       title: "Turnkey Projects HSE Manager",
       image: "/Eng Bahaa.jpeg",
       children: [
@@ -463,7 +463,7 @@ export const leaders = [
     roleEn: "VP Commercial Egypt - Elsewedy Cables",
     roleAr: "نائب الرئيس للقطاع التجاري (مصر) - السويدي للكابلات",
     name: "Eng. Ahmed Nasser",
-    img: "/Ahmed Nasser.png",
+    img: "/Ahmed Nasser.jpeg",
   },
   {
     roleEn: "Turnkey Projects General Manager",
