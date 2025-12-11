@@ -16,7 +16,6 @@ export default function ProjectModal({ category, isOpen, onClose, lang }) {
   const isRTL = lang === "ar";
   const projects = category.details || [];
 
-  // 🟢 دالة تحديد حالة المشروع (اللون والنص)
   const getProjectStatus = (proj) => {
     const today = new Date();
     const start = new Date(proj.startDate);
@@ -24,22 +23,18 @@ export default function ProjectModal({ category, isOpen, onClose, lang }) {
     const isNotStarted = start > today;
 
     if (isCompleted) {
-      return {
-        textEn: "Completed",
-        textAr: "مكتمل",
-        color: "bg-green-600", // لون أخضر للمكتمل
-      };
+      return { textEn: "Completed", textAr: "مكتمل", color: "bg-green-600" };
     } else if (isNotStarted) {
       return {
         textEn: "Not Started",
         textAr: "لم يبدأ بعد",
-        color: "bg-gray-500", // لون رمادي للي لسه مبدأش
+        color: "bg-gray-500",
       };
     } else {
       return {
         textEn: "In Progress",
         textAr: "قيد التنفيذ",
-        color: "bg-[#C8102E]", // لون أحمر للجاري تنفيذه
+        color: "bg-[#C8102E]",
       };
     }
   };
@@ -50,13 +45,17 @@ export default function ProjectModal({ category, isOpen, onClose, lang }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+        // 🟢 التعديل 1: شيلنا backdrop-blur من الموبايل (تقيلة جداً) وخليناها للكمبيوتر بس md:backdrop-blur-sm
+        className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 md:backdrop-blur-sm"
         onClick={onClose}
       >
         <motion.div
-          initial={{ scale: 0.95, opacity: 0, y: 20 }}
-          animate={{ scale: 1, opacity: 1, y: 0 }}
-          exit={{ scale: 0.95, opacity: 0, y: 20 }}
+          // 🟢 التعديل 2: تغيير الأنيميشن ليكون (سلايد) بدلاً من (سكيل) لأنه أنعم
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 50, opacity: 0 }}
+          // 🟢 التعديل 3: تبطيء الحركة وتنعيمها (easeOut) بدلاً من النتشة
+          transition={{ duration: 0.4, ease: "easeOut" }}
           className="bg-gray-50 rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden shadow-2xl relative flex flex-col"
           onClick={(e) => e.stopPropagation()}
         >
@@ -81,12 +80,15 @@ export default function ProjectModal({ category, isOpen, onClose, lang }) {
             {projects.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {projects.map((proj, index) => {
-                  // 🟢 استدعاء دالة الحالة لكل مشروع
                   const status = getProjectStatus(proj);
 
                   return (
-                    <div
+                    <motion.div
                       key={index}
+                      // 🟢 تأثير ظهور بسيط للكروت الداخلية لتخفيف الحمل
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 * index, duration: 0.3 }}
                       className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-200 flex flex-col"
                     >
                       {/* Image */}
@@ -98,7 +100,6 @@ export default function ProjectModal({ category, isOpen, onClose, lang }) {
                         />
                         <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent"></div>
                         <div className="absolute bottom-3 left-4 right-4 flex justify-between items-end text-white">
-                          {/* 🟢 عرض الحالة ديناميكياً */}
                           <span
                             className={`${status.color} text-[10px] font-bold px-2 py-1 rounded shadow-sm`}
                           >
@@ -163,7 +164,7 @@ export default function ProjectModal({ category, isOpen, onClose, lang }) {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                   );
                 })}
               </div>
