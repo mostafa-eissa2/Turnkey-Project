@@ -420,7 +420,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* 🟢 PROJECTS SECTION (EXPANDABLE LUXURY GALLERY - TRANSLATED) 🟢 */}
+        {/* 🟢 PROJECTS SECTION (SLOW & SMOOTH ANIMATION) 🟢 */}
         <section
           id="projects"
           className="py-24 bg-[#050505] text-white relative overflow-hidden"
@@ -428,7 +428,7 @@ export default function App() {
           <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 pointer-events-none"></div>
 
           <div className="container mx-auto px-6 relative z-10">
-            {/* Header - (تم تعريب العناوين هنا) */}
+            {/* Header */}
             <div className="text-center mb-16">
               <span className="text-[#C8102E] font-bold tracking-[0.2em] uppercase text-xs mb-3 block">
                 {lang === "en"
@@ -449,18 +449,20 @@ export default function App() {
                 <div
                   key={i}
                   onClick={() => openProjectModal(proj)}
-                  className="relative flex-1 hover:flex-[3] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] rounded-3xl overflow-hidden cursor-pointer group border border-white/5 hover:border-[#C8102E]/50"
+                  // 🟢 التعديل هنا: زيادة المدة إلى duration-[1200ms] لتهدئة السرعة
+                  className="relative flex-1 hover:flex-[3] transition-all duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] rounded-3xl overflow-hidden cursor-pointer group border border-white/5 hover:border-[#C8102E]/50"
                 >
                   <img
                     src={proj.img}
                     alt={proj.titleEn}
-                    className="absolute inset-0 w-full h-full object-cover filter brightness-[0.6] group-hover:brightness-100 group-hover:scale-110 transition-all duration-1000"
+                    // 🟢 وأيضاً تبطيء زووم الصورة ليتناسب مع الحركة
+                    className="absolute inset-0 w-full h-full object-cover filter brightness-[0.6] group-hover:brightness-100 group-hover:scale-110 transition-all duration-[1500ms]"
                   />
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 group-hover:opacity-80 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 group-hover:opacity-80 transition-opacity duration-[1000ms]" />
 
                   <div className="absolute bottom-0 left-0 w-full p-6 md:p-8 flex flex-col justify-end h-full">
-                    <div className="mb-auto self-end opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-4 group-hover:translate-x-0">
+                    <div className="mb-auto self-end opacity-0 group-hover:opacity-100 transition-all duration-[1000ms] translate-x-4 group-hover:translate-x-0">
                       <div className="w-12 h-12 rounded-full bg-[#C8102E] flex items-center justify-center shadow-lg text-white">
                         {isRTL ? (
                           <ArrowLeft size={24} />
@@ -470,24 +472,24 @@ export default function App() {
                       </div>
                     </div>
 
-                    <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                      <span className="text-4xl font-black text-white/10 group-hover:text-white/20 absolute -top-12 left-0 transition-colors duration-500">
+                    <div className="transform translate-y-8 group-hover:translate-y-0 transition-transform duration-[1000ms]">
+                      <span className="text-4xl font-black text-white/10 group-hover:text-white/20 absolute -top-12 left-0 transition-colors duration-[1000ms]">
                         0{i + 1}
                       </span>
 
-                      <span className="text-[#C8102E] text-[10px] font-bold uppercase tracking-widest mb-2 block opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100">
+                      <span className="text-[#C8102E] text-[10px] font-bold uppercase tracking-widest mb-2 block opacity-0 group-hover:opacity-100 transition-all duration-[1000ms] delay-100">
                         {lang === "en" ? "Sector Category" : "تصنيف القطاع"}
                       </span>
 
                       <h3
-                        className={`font-bold text-white leading-tight mb-2 transition-all duration-500 whitespace-nowrap md:whitespace-normal
+                        className={`font-bold text-white leading-tight mb-2 transition-all duration-[1000ms] whitespace-nowrap md:whitespace-normal
                                 ${i === 0 ? "text-2xl md:text-3xl" : "text-xl md:text-2xl"}
                              `}
                       >
                         {isRTL ? proj.titleAr : proj.titleEn}
                       </h3>
 
-                      <p className="text-gray-300 text-xs md:text-sm font-medium opacity-0 group-hover:opacity-100 h-0 group-hover:h-auto overflow-hidden transition-all duration-500 delay-100">
+                      <p className="text-gray-300 text-xs md:text-sm font-medium opacity-0 group-hover:opacity-100 h-0 group-hover:h-auto overflow-hidden transition-all duration-[1000ms] delay-200">
                         {lang === "en"
                           ? "Click to view project details & statistics"
                           : "اضغط لعرض تفاصيل وإحصائيات المشاريع"}
@@ -495,7 +497,7 @@ export default function App() {
                     </div>
                   </div>
 
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none md:group-hover:opacity-0 transition-opacity duration-300">
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none md:group-hover:opacity-0 transition-opacity duration-[1000ms]">
                     <h3 className="hidden md:block text-2xl font-bold text-white/50 tracking-widest uppercase rotate-[-90deg] whitespace-nowrap">
                       {(isRTL ? proj.titleAr : proj.titleEn)
                         .split(" ")
