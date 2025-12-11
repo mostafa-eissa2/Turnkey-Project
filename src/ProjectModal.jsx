@@ -45,16 +45,13 @@ export default function ProjectModal({ category, isOpen, onClose, lang }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        // 🟢 التعديل 1: شيلنا backdrop-blur من الموبايل (تقيلة جداً) وخليناها للكمبيوتر بس md:backdrop-blur-sm
         className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 md:backdrop-blur-sm"
         onClick={onClose}
       >
         <motion.div
-          // 🟢 التعديل 2: تغيير الأنيميشن ليكون (سلايد) بدلاً من (سكيل) لأنه أنعم
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 50, opacity: 0 }}
-          // 🟢 التعديل 3: تبطيء الحركة وتنعيمها (easeOut) بدلاً من النتشة
           transition={{ duration: 0.4, ease: "easeOut" }}
           className="bg-gray-50 rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden shadow-2xl relative flex flex-col"
           onClick={(e) => e.stopPropagation()}
@@ -85,14 +82,13 @@ export default function ProjectModal({ category, isOpen, onClose, lang }) {
                   return (
                     <motion.div
                       key={index}
-                      // 🟢 تأثير ظهور بسيط للكروت الداخلية لتخفيف الحمل
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 * index, duration: 0.3 }}
-                      className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-200 flex flex-col"
+                      className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-200 flex flex-col h-full"
                     >
                       {/* Image */}
-                      <div className="h-48 overflow-hidden relative">
+                      <div className="h-48 shrink-0 overflow-hidden relative">
                         <img
                           src={proj.img}
                           alt={isRTL ? proj.nameAr : proj.nameEn}
@@ -110,15 +106,17 @@ export default function ProjectModal({ category, isOpen, onClose, lang }) {
 
                       {/* Content */}
                       <div className="p-5 flex-1 flex flex-col">
-                        <h3 className="text-lg font-bold text-gray-800 mb-2 line-clamp-1">
+                        <h3 className="text-lg font-bold text-gray-800 mb-2">
                           {isRTL ? proj.nameAr : proj.nameEn}
                         </h3>
-                        <p className="text-sm text-gray-500 mb-4 line-clamp-2 flex-1">
+
+                        {/* 🟢 التعديل هنا: تمت إزالة line-clamp-2 ليظهر النص بالكامل */}
+                        <p className="text-sm text-gray-500 mb-4 leading-relaxed">
                           {isRTL ? proj.descAr : proj.descEn}
                         </p>
 
                         {/* Stats Grid */}
-                        <div className="grid grid-cols-2 gap-2 mb-4">
+                        <div className="grid grid-cols-2 gap-2 mb-4 mt-auto">
                           <div className="flex items-center gap-1.5 text-[11px] text-gray-600 bg-gray-50 p-1.5 rounded-lg border border-gray-100">
                             <Calendar size={14} className="text-[#C8102E]" />
                             <span>{proj.startDate}</span>
@@ -144,7 +142,7 @@ export default function ProjectModal({ category, isOpen, onClose, lang }) {
                         </div>
 
                         {/* Progress Bar */}
-                        <div className="mt-auto">
+                        <div>
                           <div className="flex justify-between items-center mb-1">
                             <span className="text-xs font-bold text-gray-700 flex items-center gap-1">
                               <Activity size={12} />{" "}
