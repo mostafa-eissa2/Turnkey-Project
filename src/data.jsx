@@ -320,7 +320,7 @@ export const departments = [
 export const projects = [
   {
     titleEn: "High Voltage Projects",
-    titleAr: "مشروعات الجهد العالي",
+    titleAr: "مشروعات الجهد الفائق",
     img: "/high 1.jpeg",
     // 🟢 إضافة البيانات التفصيلية: الطول + الجهد
     details: [
